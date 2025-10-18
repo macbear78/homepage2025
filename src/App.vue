@@ -1,26 +1,45 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-</template>
+  <v-app>
+  <header-componet/>
+  <div>
+    <Title1Component />
+    <Title2Component />
+    <TitleSub1Component/>
+    <TitleSub2Component/>
+    <TitleSub3Component/>
+    <TitleSub4Component/> 
+  </div>
+  <footer-componet/>
+  </v-app>
+</template> 
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import HeaderComponet from './components/HeaderComponet.vue' 
+import FooterComponet from './components/FooterComponet.vue'
+import Title1Component from './components/Title1Component.vue';
+import Title2Component from './components/Title2Component.vue';
+import TitleSub1Component from './components/TitleSub1Component.vue';
+import TitleSub2Component from './components/TitleSub2Component.vue';
+import TitleSub3Component from './components/TitleSub3Component.vue';
+import TitleSub4Component from './components/TitleSub4Component.vue';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.container {
+  max-width: 1200px;
+}
+
+/* 메뉴 hover 시 부드럽게 */
+.group:hover span {
+  color: #2dd4bf;
+  transition: color 0.3s;
 }
 </style>
+  
+
+
+
+
+
+  
