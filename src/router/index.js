@@ -1,52 +1,65 @@
 import { createWebHistory, createRouter } from "vue-router";
 import HomePage from "@/views/HomePage.vue";
-import TestComponent from "@/components/TestComponent.vue";
-// import LandingComponent from "@/components/LandingComponent.vue";
-import CreateInMetaversePage from "@/views/CreateInMetaversePage.vue";
-import EstimateListPage from "@/views/EstimateListPage.vue";
-import EstimateWritePage from "@/views/EstimateWritePage.vue";
-import EstimateDetailPage from "@/views/EstimateDetailPage.vue";
-import EstimateUpdatePage from "@/views/EstimateUpdatePage.vue";
+import AboutCompanyPage from "@/views/AboutCompanyPage.vue";
+import AboutBiPage from "@/views/AboutBiPage.vue";
+import CloudFemsPage from "@/views/CloudFemsPage.vue";
+import CloudMesPage from "@/views/CloudMesPage.vue";
+import ContactUsPage from "@/views/ContactUsPage.vue";
+import EnergyEfficiencyPage from "@/views/EnergyEfficiencyPage.vue";
+import NewsPage from "@/views/NewsPage.vue";
+import OnlineQuotePage from "@/views/OnlineQuotePage.vue";
+import SmartFactoryPage from "@/views/SmartFactoryPage.vue";
+
 const routes = [ 
-    // {
-    //     path: "/",
-    //     name: "Landing",
-    //     component: LandingComponent,
-    // }, 
     {
         path: "/",
         name: "HomePage",
-        component: HomePage,
+        component: HomePage,  
     },
     {
-        path: "/test",  // TestComponent.vue로 이동할 Path
-        name: "TestComponent",  // router name
-        component: TestComponent,  // Path로 이동될 Component
+        path: "/AboutBi",  
+        name: "AboutBiPage",  
+        component: AboutBiPage, 
     },
     {
-        path: "/CreateInMetaversePage",  // 
-        name: "CreateInMetaversePage",  // router name
-        component: CreateInMetaversePage,  // Path로 이동될 Component
+        path: "/AboutCompany",  
+        name: "AboutCompanyPage",  
+        component: AboutCompanyPage, 
     },
     {
-        path: "/EstimateListPage",  // 
-        name: "EstimateListPage",  // router name
-        component: EstimateListPage,  // Path로 이동될 Component
+        path: "/CloudFems",   
+        name: "CloudFemsPage",  
+        component: CloudFemsPage,  
     },
     {
-        path: "/EstimateWritePage",  // 
-        name: "EstimateWritePage",  // router name
-        component: EstimateWritePage,  // Path로 이동될 Component
+        path: "/CloudMes",   
+        name: "CloudMesPage",  
+        component: CloudMesPage,  
     },
     {
-        path: "/EstimateDetailPage",  // 
-        name: "EstimateDetailPage",  // router name
-        component: EstimateDetailPage,  // Path로 이동될 Component
+        path: "/ContactUs",   
+        name: "ContactUsPage",  
+        component: ContactUsPage,  
     },
     {
-        path: "/EstimateUpdatePage",  // 
-        name: "EstimateUpdatePage",  // router name
-        component: EstimateUpdatePage,  // Path로 이동될 Component
+        path: "/EnergyEfficiency",   
+        name: "EnergyEfficiencyPage",  
+        component: EnergyEfficiencyPage,  
+    },
+    {
+        path: "/News",   
+        name: "NewsPage",  
+        component: NewsPage,  
+    },
+    {
+        path: "/OnlineQuote",   
+        name: "OnlineQuotePage",  
+        component: OnlineQuotePage,  
+    },
+    {
+        path: "/SmartFactory",   
+        name: "SmartFactoryPage",  
+        component: SmartFactoryPage,  
     },
 ];
 

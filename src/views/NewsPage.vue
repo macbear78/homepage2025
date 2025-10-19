@@ -1,7 +1,7 @@
 <template>
     <div>
-       <h2>Create in Metaverse</h2>
-       Test Page
+       <h2>뉴스</h2>
+       뉴스
     </div>
 </template>
 

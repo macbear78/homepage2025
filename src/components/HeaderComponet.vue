@@ -21,12 +21,12 @@
     <nav>
       <ul class="flex space-x-20">
         <li v-for="link in navLinks" :key="link.name">
-          <a
-            :href="link.url"
+          <router-link
+            :to="link.url"
             class="font-semibold hover:text-teal-400 transition-colors duration-300"
           > 
             {{ link.name }}
-          </a>
+          </router-link>
         </li>
       </ul>
 
@@ -88,22 +88,29 @@
     <div class="max-w-5xl mx-auto grid grid-cols-3 gap-y-8 gap-x-20 text-lg text-left">
       <!-- 1열 -->
       <div class="flex flex-col space-y-3 text-center">
-        <a href="#" 
-          class="font-semibold hover:text-teal-400 transition-colors duration-300">회사소개</a>
-        <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">BI 소개</a>
-        <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">오시는길</a>
+        <router-link to="AboutCompany"  
+          class="font-semibold hover:text-teal-400 transition-colors duration-300">회사소개</router-link>
+          
+        <router-link to="AboutBi" 
+        class="font-semibold hover:text-teal-400 transition-colors duration-300">BI 소개</router-link>     
+        <router-link to="ContactUs" 
+        class="font-semibold hover:text-teal-400 transition-colors duration-300">오시는길</router-link>
       </div>
 
       <!-- 2열 -->
       <div class="flex flex-col space-y-3 text-center">
-        <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">클라우드 FEMS</a>
-        <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">클라우드 MES</a>
+        <router-link to="CloudFems" 
+        class="font-semibold hover:text-teal-400 transition-colors duration-300">클라우드 FEMS</router-link>
+        <router-link to="CloudMes" 
+        class="font-semibold hover:text-teal-400 transition-colors duration-300">클라우드 MES</router-link>
       </div>
 
       <!-- 3열 -->
       <div class="flex flex-col space-y-3 text-center">
-        <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">스마트팩토리</a>
-        <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">에너지효율화</a>
+        <router-link to="SmartFactory" 
+        class="font-semibold hover:text-teal-400 transition-colors duration-300">스마트팩토리</router-link>
+        <router-link to="EnergyEfficiency" 
+        class="font-semibold hover:text-teal-400 transition-colors duration-300">에너지효율화</router-link>
       </div>
       
     </div>
@@ -130,11 +137,11 @@ defineProps({
   navLinks: {
     type: Array,
     default: () => [
-      { name: "회사소개", url: "/about" },
-      { name: "솔루션", url: "/solution" },
-      { name: "주요사업", url: "/business" },
-      { name: "뉴스", url: "/news" },
-      { name: "온라인견적", url: "/estimate" },
+      { name: "회사소개", url: "/AboutCompany" },
+      { name: "솔루션", url: "" },
+      { name: "주요사업", url: "" },
+      { name: "뉴스", url: "/News" },
+      { name: "온라인견적", url: "/OnlineQuote" },
     ],
   },
 });

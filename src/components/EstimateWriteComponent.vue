@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="mb-3 row">
-        <label class="col-md-3 col-form-label">내용</label>
+        <label class="col-md-3 col-form-label">내용</label> 
         <div class="col-md-9">
           <div class="input-group mb-3">
             <v-textarea

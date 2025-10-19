@@ -1,6 +1,7 @@
 <template>
   <v-app>
   <header-componet/>
+  <router-view/>
   <div>
     <Title1Component />
     <Title2Component />
@@ -10,7 +11,7 @@
     <TitleSub4Component/> 
   </div>
   <footer-componet/>
-  </v-app>
+  </v-app>   
 </template> 
 
 <script setup>
