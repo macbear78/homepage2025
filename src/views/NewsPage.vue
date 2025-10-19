@@ -1,15 +1,7 @@
 <template>
-    <div>
-       <h2>뉴스</h2>
-       뉴스
-    </div>
+  <img :src="desktopImg" alt="Desktop" />
 </template>
 
 <script setup>
-
-
+import desktopImg from '@/assets/Desktop-3.png'
 </script>
-  
-<style>
-
-</style>

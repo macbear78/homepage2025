@@ -1,15 +1,8 @@
 <template>
-    <div>
-       <h2>회사소개</h2>
-       회사소개
-    </div>
+  <img :src="desktopImg" alt="Desktop" />
 </template>
 
 <script setup>
-
-
-</script>
-  
-<style>
-
-</style>
+import desktopImg from '@/assets/Desktop-6.png'
+</script> 
+ 

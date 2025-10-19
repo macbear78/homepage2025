@@ -1,15 +1,7 @@
 <template>
-    <div>
-       <h2>에너지효율화</h2>
-       에너지효휼화
-    </div>
+  <img :src="desktopImg" alt="Desktop" />
 </template>
 
 <script setup>
-
-
+import desktopImg from '@/assets/Desktop-2.png'
 </script>
-  
-<style>
-
-</style>

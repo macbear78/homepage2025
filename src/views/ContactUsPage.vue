@@ -1,15 +1,7 @@
 <template>
-    <div>
-       <h2>오시는길</h2>
-       오시는길
-    </div>
+  <img :src="desktopImg" alt="Desktop" />
 </template>
 
 <script setup>
-
-
+import desktopImg from '@/assets/Desktop-4.png'
 </script>
-  
-<style>
-
-</style>

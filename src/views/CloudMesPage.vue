@@ -1,15 +1,7 @@
 <template>
-    <div>
-       <h2>클라우드MES</h2>
-       클라우드MES
-    </div>
+  <img :src="desktopImg" alt="Desktop" />
 </template>
 
 <script setup>
-
-
+import desktopImg from '@/assets/Desktop-1.png'
 </script>
-  
-<style>
-
-</style>

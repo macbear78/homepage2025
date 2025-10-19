@@ -1,15 +1,7 @@
 <template>
-    <div>
-       <h2>BI소개</h2>
-       BI소개
-    </div>
+  <img :src="desktopImg" alt="Desktop" />
 </template>
 
 <script setup>
-
-
+import desktopImg from '@/assets/Desktop-5.png'
 </script>
-  
-<style>
-
-</style>

@@ -1,15 +1,7 @@
 <template>
-    <div>
-       <h2>스마트팩토리</h2>
-       스마트팩토리
-    </div>
+  <img :src="desktopImg" alt="Desktop" />
 </template>
 
 <script setup>
-
-
+import desktopImg from '@/assets/Desktop-7.png'
 </script>
-  
-<style>
-
-</style>
