@@ -12,7 +12,7 @@ import SmartFactoryPage from "@/views/SmartFactoryPage.vue";
 
 const routes = [ 
     {
-        path: "/",
+        path: "/Main",
         name: "HomePage",
         component: HomePage,  
     },

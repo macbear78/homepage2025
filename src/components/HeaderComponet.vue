@@ -12,7 +12,8 @@
     <div class="flex items-center space-x-3">
       <slot name="left">
         <img src="/logo.png" alt="moncat factory" class="h-6" />
-        <h1 class="text-lg font-semibold">{{ title }}</h1>
+        <router-link to="Main"  
+          class="font-semibold hover:text-teal-400 transition-colors duration-300">{{ title }}</router-link>
       </slot>
     </div>
 

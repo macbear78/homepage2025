@@ -2,6 +2,7 @@ const target = 'http://127.0.0.1:3000';
 
 module.exports = {
   publicPath: './',
+  outputDir: 'dist',
   devServer: {
     port: 4001,
     proxy: {
