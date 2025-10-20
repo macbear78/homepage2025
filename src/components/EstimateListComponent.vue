@@ -1,29 +1,26 @@
 <template>
-    <div>
-        <button type="button" class="btn btn-primary">Primary</button>
-       <h2>온라인견적</h2>
-    </div>
-
-  <main class="mt-3">
     <div class="container">
       <div class="float-end mb-1">
         <button type="button" class="btn btn-dark" @click="goToWrite">글쓰기</button>
       </div>
+      <p>총 {{ totalEstimateBoards }} 개, {{ totalPages }} 페이지중 {{ currentPage }}페이지</p>
+      <p>총 게시글 수: {{ boardCount }}</p>
+      <p>총 {{ row_num }} 개의 게시물</p>
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>번호1</th>
+            <th>번호</th>
             <th>제목</th>
-            <th>글쓴이</th>
             <th>내용</th>
+            <th>글쓴이</th>
             <th>날짜</th>
             <th>조회</th>
           </tr>  
         </thead>
         <tbody>
           <tr :key="i" v-for="(board, i) in boardPagingList">
-            <td>{{board.board_num}}</td>
-             <td><a @click="fnView(board.board_num);" 
+            <td>{{board.board_id}}</td>
+             <td><a @click="fnView(board.board_id);" 
               style="
               color: orange;
               font-size: 2.0em;
@@ -41,107 +38,135 @@
           </tr> 
         </tbody>
       </table>
-      <nav aria-label="...">
-      <ul class="pagination">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item active">
-          <a class="page-link" href="#">2 <span class="sr-only"></span></a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
-        </li>
-      </ul>
-    </nav>
 
-    <p>{{this.row_num}}</p>
+      <nav aria-label="페이지 네비게이션">
+        <ul class="pagination justify-content-center">
+          <!-- 이전 버튼 -->
+          <li class="page-item" :class="{ disabled: currentPage === 1 }">
+            <a class="page-link" href="#" @click.prevent="goToPage(currentPage - 1)">Previous</a>
+          </li>
 
+          <!-- 페이지 번호 -->
+          <li
+            v-for="i in totalPages"
+            :key="i"
+            class="page-item"
+            :class="{ active: i === currentPage }"
+          >
+            <a class="page-link" href="#" @click.prevent="goToPage(i)">{{ i }}</a>
+          </li>
+
+          <!-- 다음 버튼 -->
+          <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+            <a class="page-link" href="#" @click.prevent="goToPage(currentPage + 1)">Next</a>
+          </li>
+        </ul>
+      </nav>
     </div>
-  </main>
 
-</template>
+</template> 
+  
 
 <script setup>
+import axios from 'axios'; 
+import { ref, onMounted  } from 'vue'  
+import router from "@/router";
+  // DynamoDB와의 상호작용을 위한 Amazon API GATEWAY
+  //const  apiEndpoint_items = 'https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/items';
+  //const  apiEndpoint_estimate = 'https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/estimate';
+  const boardPagingList = ref([]);
+  const row_num = ref(0);
+  row_num.value = 0;
+  let currentPage = ref([]);
+  currentPage.value = 1;
+  let totalPages = ref([]); 
+  totalPages.value = 5; // 전체 페이지 수 (나중에 DB 결과에 따라 변경)
+  let totalEstimateBoards = ref([]);
+  totalEstimateBoards.value = 0; // 전체 견적 게시물 수 (나중에 DB 결과에 따라 변경)
+    // 게시글 수를 담을 ref
+  const boardCount = ref(0)
 
-</script>
 
 
-<script>
-
-export default {
-  data() {
-    return {
-      boardList: [],
-      boardPagingList: [],
-      row_num : 0,
-      list_num : 10, //paging:한 페이지당 데이터 개수
-      start_rou_num : 10,
-    };
-  },
-  mounted() {
-    //this.fnGetList()
-  },
-  created() {
-    // this.getBoardList().then(
-    //   console.log
-    // );
-    this.getBoardPagingList();
-  },
-  methods: {
-    delay(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    },
-    async getBoardList() {
-      this.boardList = await this.$api("/api/testApiKim",{});
-      console.log(this.boardList);
-      this.row_num = this.boardList.length; 
-      //console.log(this.row_num);
-      return(this.boardList.length);
-    },
-    async getBoardPagingList() {
-      this.boardPagingList = await this.$api("/api/getBoardPagingList",{param:[this.start_rou_num]});
-      console.log(this.boardPagingList);
-      this.row_num = this.boardPagingList.length; 
-      //console.log(this.row_num);
-      return(this.boardPagingList.length);
-    },
-    goToWrite() {
-     this.$router.push({path:'/EstimateWritePage'});  
-    },
-
-    fnView(board_id) {
-      this.$router.push({path:'/EstimateDetailPage', query:{board_id:board_id}}); 
-    },
-
+  onMounted(async() => {
+    console.log(totalPages.value);
+    fetchBoardCount();
     
-    // const promise = Promise(resolve, reject) => {
-    //   /*
-    //   비공기 작업 성공시 resolve()를 호출하고,
-    //   비동기 작업 실패시 reject()를 호출하도록 구현한다.
-    //   */
-    // },
-    
-    // promise.then(
-    //   //resolve가 호출되면 then이 실행
-
-    // )
-    // .catch(
-    //    //reject가 호출되면 catch가 실행
-    // )
-    // .finally(
-    //   //콜백 작업을 마치면 무조건 실행되는 finally (생략가능)
-    // )
-    
-   /*
-    $sql="select * from board order by regdate DESC limit $start, $list_num;";
-   */
-
-
+    //await fetchPosts();
+  })
+  
+  // 페이지 로드 시 실행
+const fetchBoardCount = async () => {
+  try {
+    const requestCode = "getBoardCount"
+    const response = await axios.get(`https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/estimate?requestCode=${requestCode}`);
+    boardCount.value = response.data.count;
+    totalPages.value = boardCount.value/10;
+    console.log('게시글 수:', boardCount.value);
+    goToPage(1);
+  } catch (error) {
+    console.error('게시글 수 가져오기 실패:', error);
   }
-} 
+}
 
+async function goToPage(page) { 
+  if (page < 1 || page > totalPages.value) return;
+  currentPage.value = page;
+  console.log(`📄 페이지 이동: ${page}`);
+  // 실제 데이터 다시 읽기
+  loadData(page);
+}
+async function loadData(page) {
+      // 예: axios 호출
+      console.log(`페이지 ${page} 데이터 로드`);
+      // axios.get(`https://api.../items?page=${page}`)
+      try {
+        const requestCode = "read";
+        const order = "desc";
+        const limit = 10
+        let startId = boardCount.value-((page-1)* limit); 
+        console.log(`${startId}`);
+        const response = await axios.get(
+          `https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/estimate?requestCode=${requestCode}&startId=${startId}&limit=${limit}&order=${order}`
+        )
+        boardPagingList.value = response.data
+      } catch (err) { 
+        console.error('데이터 가져오기 실패:', err) 
+      }
+}
+          
+function fnView(board_id) {
+      router.push({path:'/EstimateDetailPage', query:{board_id:board_id}}); 
+      
+}
+
+function goToWrite() {
+    router.push({path:'/EstimateWritePage'});  
+}
+  
+        
 </script>
+  
+<style>
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
+</style>
 
+<style scoped>
+.pagination .page-link {
+  cursor: pointer;
+}
+</style>
+
+
+
+
+
+
+ 

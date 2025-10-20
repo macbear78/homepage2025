@@ -75,8 +75,6 @@
       </div>
     </transition> -->
   </header>
-  <p>aaa</p>
-  <p>aaa</p>
 
       <!-- 숨겨진 화면 -->
         <transition name="slide-fade">
@@ -142,7 +140,7 @@ defineProps({
       { name: "솔루션", url: "" },
       { name: "주요사업", url: "" },
       { name: "뉴스", url: "/News" },
-      { name: "온라인견적", url: "/OnlineQuote" },
+      { name: "온라인견적", url: "/OnlineQuote/EstimateList" },
     ],
   },
 });
