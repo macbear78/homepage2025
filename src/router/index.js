@@ -9,6 +9,10 @@ import EnergyEfficiencyPage from "@/views/EnergyEfficiencyPage.vue";
 import NewsPage from "@/views/NewsPage.vue";
 import OnlineQuotePage from "@/views/OnlineQuotePage.vue";
 import SmartFactoryPage from "@/views/SmartFactoryPage.vue";
+import EstimateListComponent from "@/components/EstimateListComponent.vue";
+import EstimateDetailComponent from "@/components/EstimateDetailComponent.vue";
+import EstimateWriteComponent from "@/components/EstimateWriteComponent.vue";
+import EstimateUpdateComponent from "@/components/EstimateUpdateComponent.vue";
 
 const routes = [ 
     {
@@ -54,7 +58,25 @@ const routes = [
     {
         path: "/OnlineQuote",   
         name: "OnlineQuotePage",  
-        component: OnlineQuotePage,  
+        component: OnlineQuotePage, 
+        children: [
+            {
+                path: 'EstimateList', 
+                component: EstimateListComponent
+            },
+            {
+                path: 'EstimateDetail',
+                component: EstimateDetailComponent
+            },
+            {
+                path: 'EstimateWrite', 
+                component: EstimateWriteComponent
+            },
+            {
+                path: 'EstimateUpdate', 
+                component: EstimateUpdateComponent
+            },
+        ] 
     },
     {
         path: "/SmartFactory",   
