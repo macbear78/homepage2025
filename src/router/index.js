@@ -1,5 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
-import HomePage from "@/views/HomePage.vue";
+import MainPage from "@/views/MainPage.vue";
 import AboutCompanyPage from "@/views/AboutCompanyPage.vue";
 import AboutBiPage from "@/views/AboutBiPage.vue";
 import CloudFemsPage from "@/views/CloudFemsPage.vue";
@@ -17,8 +17,8 @@ import EstimateUpdateComponent from "@/components/EstimateUpdateComponent.vue";
 const routes = [ 
     {
         path: "/Main",
-        name: "HomePage",
-        component: HomePage,  
+        name: "MainPage",
+        component: MainPage,  
     },
     {
         path: "/AboutBi",  
