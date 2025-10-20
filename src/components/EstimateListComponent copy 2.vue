@@ -36,16 +36,17 @@
           </tr> 
         </tbody>
       </table>
+
       <nav aria-label="페이지 네비게이션">
         <ul class="pagination justify-content-center">
-          <!-- 이전 블록 버튼 -->
-          <li class="page-item" :class="{ disabled: startPage === 1 }">
-            <a class="page-link" href="#" @click.prevent="goToPage(startPage - 1)">Prev 10</a>
+          <!-- 이전 버튼 -->
+          <li class="page-item" :class="{ disabled: currentPage === 1 }">
+            <a class="page-link" href="#" @click.prevent="goToPage(currentPage - 1)">Previous</a>
           </li>
 
           <!-- 페이지 번호 -->
           <li
-            v-for="i in pagesInBlock"
+            v-for="i in totalPages"
             :key="i"
             class="page-item"
             :class="{ active: i === currentPage }"
@@ -53,20 +54,20 @@
             <a class="page-link" href="#" @click.prevent="goToPage(i)">{{ i }}</a>
           </li>
 
-          <!-- 다음 블록 버튼 -->
-          <li class="page-item" :class="{ disabled: endPage === totalPages }">
-            <a class="page-link" href="#" @click.prevent="goToPage(endPage + 1)">Next 10</a>
+          <!-- 다음 버튼 -->
+          <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+            <a class="page-link" href="#" @click.prevent="goToPage(currentPage + 1)">Next</a>
           </li>
         </ul>
       </nav>
-  </div>
+    </div>
 
 </template> 
   
 
 <script setup>
 import axios from 'axios'; 
-import { ref, computed, onMounted  } from 'vue'  
+import { ref, onMounted  } from 'vue'  
 import router from "@/router";
   // DynamoDB와의 상호작용을 위한 Amazon API GATEWAY
   //const  apiEndpoint_items = 'https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/items';
@@ -75,33 +76,15 @@ const boardPagingList = ref([]);
 const currentPage = ref(1);
 const totalPages = ref(1);
 const boardCount = ref(0)
-const pageBlockSize = 10;
 
 
 
 onMounted(async() => {
     console.log(totalPages.value);
     fetchBoardCount();
+    
+
 })
-
-// 현재 블록의 시작 페이지
-const startPage = computed(() => {
-  return Math.floor((currentPage.value - 1) / pageBlockSize) * pageBlockSize + 1;
-});
-
-// 현재 블록의 끝 페이지
-const endPage = computed(() => {
-  return Math.min(startPage.value + pageBlockSize - 1, totalPages.value);
-});
-
-// 현재 블록에 표시할 페이지 배열
-const pagesInBlock = computed(() => {
-  const pages = [];
-  for (let i = startPage.value; i <= endPage.value; i++) {
-    pages.push(i);
-  }
-  return pages;
-});
   
 // 페이지 로드 시 실행
 const fetchBoardCount = async () => {
