@@ -101,10 +101,10 @@
         console.log(this.estimateDetail);
       },
       goToList() {
-       this.$router.push({path:'/EstimateListPage'}); 
+       this.$router.push({path:'/OnlineQuote/EstimateList'}); 
       },
       goToUpdate(board_id) {
-       this.$router.push({path:'/EstimateUpdatePage', query:{board_id:board_id}}); 
+       this.$router.push({path:'/OnlineQuote/EstimateUpdate', query:{board_id:board_id}}); 
       },
        
   

@@ -120,10 +120,9 @@ export default {
         } 
       });
     },
-
-   
-     
-
+    goToList() {
+       this.$router.push({path:'/OnlineQuote/EstimateList'}); 
+      },     
   }
 }
 </script>

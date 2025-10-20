@@ -119,8 +119,8 @@ const  apiEndpoint_estimate = 'https://828299ds42.execute-api.ap-northeast-2.ama
 
         //console.log(this.estimateDetail.title);
       },
-      goToDetail(board_id) {
-       this.$router.push({path:'/EstimateDetailPage', query:{board_id:board_id}}); 
+      goToDetail(board_id) { 
+       this.$router.push({path:'/OnlineQuote/EstimateDetail', query:{board_id:board_id}}); 
       },
       EstimateUpdate() {
         this.$swal.fire({

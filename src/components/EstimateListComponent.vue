@@ -147,12 +147,12 @@ async function loadData(page) {
 }
           
 function fnView(board_id) {
-    router.push({path:'/EstimateDetailPage', query:{board_id:board_id}}); 
+    router.push({path:'/OnlineQuote/EstimateDetail', query:{board_id:board_id}}); 
       
 }
 
 function goToWrite() {
-    router.push({path:'/EstimateWritePage'});  
+    router.push({path:'/OnlineQuote/EstimateWrite'});  
 }
   
         
