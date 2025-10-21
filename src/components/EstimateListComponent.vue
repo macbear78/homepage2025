@@ -152,7 +152,7 @@ function fnView(board_id) {
 }
 
 function goToWrite() {
-    router.push({path:'/OnlineQuote/EstimateWrite'});  
+    router.push({path:'/OnlineQuote/EstimateWrite', query:{board_id:boardCount.value + 1}});  
 }
   
         
