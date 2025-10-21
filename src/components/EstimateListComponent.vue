@@ -129,7 +129,7 @@ async function loadData(page) {
     console.log(`페이지 ${page} 데이터 로드`);
     // axios.get(`https://api.../items?page=${page}`)
     try {
-      const requestCode = "read";
+      const requestCode = "multi_read";
       const order = "desc";
       const limit = 10
       let startId = boardCount.value - ((page - 1) * limit); 
