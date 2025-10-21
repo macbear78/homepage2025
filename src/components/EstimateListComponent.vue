@@ -74,8 +74,9 @@ import router from "@/router";
 const boardPagingList = ref([]);
 const currentPage = ref(1);
 const totalPages = ref(1);
-const boardCount = ref(0)
+const boardCount = ref(0);
 const pageBlockSize = 10;
+//const last_board_id = ref(0);
 
 
 
@@ -140,7 +141,8 @@ async function loadData(page) {
         params: { requestCode, startId, limit, order }
       }
     );
-      boardPagingList.value = response.data
+      boardPagingList.value = response.data;
+      console.log(boardPagingList.value);
     } catch (err) { 
       console.error('데이터 가져오기 실패:', err) 
     }
