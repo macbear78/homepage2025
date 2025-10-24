@@ -4,41 +4,41 @@
       @mouseleave="hover = false"
     >
   <header
-    class="fixed top-0 left-0 w-full flex items-center justify-between px-8 py-4 bg-black/90 text-white z-50 backdrop-blur-md"
+    class="fixed top-0 left-0 w-full grid grid-cols-10 items-center px-6 md:px-12 py-3 bg-black/90 text-white z-50 backdrop-blur-md"
   >
 
-    
-    왼쪽: 로고 영역
     <div class="flex items-center space-x-3">
       <slot name="left">
         <img src="/logo.png" alt="moncat factory" class="h-6" />
-        <router-link to="Main"  
-          class="font-semibold hover:text-teal-400 transition-colors duration-300">{{ title }}</router-link>
       </slot>
     </div>
-
+    <div>aa</div>
+    <div>aa</div>
+    <div>aa</div>
+    <div>aa</div>
+    <div>aa</div>
      <!-- 가운데: 메뉴 -->
-  <div class="hidden md:flex flex-1 justify-center">
-    <nav>
-      <ul class="flex space-x-20">
+    
+    <!-- <nav class="justify-self-start col-start-3 col-end-8" >
+      <ul class="flex space-x-32">
         <li v-for="link in navLinks" :key="link.name">
-          <router-link
-            :to="link.url"
+          <a
+            :href="link.url"
             class="font-semibold hover:text-teal-400 transition-colors duration-300"
           > 
             {{ link.name }}
-          </router-link>
+          </a>
         </li>
       </ul>
-
-    </nav>
-  </div>
-  <button class="hamburger-menu" @click="toggleMobileMenu">
+    </nav> -->
+  <!-- 오른쪽: 버튼 또는 아이콘 -->
+  <!-- <div class="justify-self-end flex space-x-4 col-start-10">
+       <button class="hamburger-menu" @click="toggleMobileMenu">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
     </button>
-
+  </div> -->
     <!-- 모바일용 메뉴 아이콘 -->
     <!-- <button
       class="md:hidden flex flex-col justify-center items-center space-y-1"
@@ -79,41 +79,60 @@
       <!-- 숨겨진 화면 -->
         <transition name="slide-fade">
   <div
-    v-if="hover"
-    class="absolute top-full left-0 w-full bg-black/90 text-white py-10 z-40 backdrop-blur-md"
+    v-if="hover" 
+    class="fix top-20 left-0 w-full grid grid-cols-10 items-center px-6 md:px-12 py-3 bg-black/90 text-white z-50 backdrop-blur-md"
     @mouseenter="hover = true"
     @mouseleave="hover = false"
   >
-    <div class="max-w-5xl mx-auto grid grid-cols-3 gap-y-8 gap-x-20 text-lg text-left">
-      <!-- 1열 -->
-      <div class="flex flex-col space-y-3 text-center">
-        <router-link to="AboutCompany"  
-          class="font-semibold hover:text-teal-400 transition-colors duration-300">회사소개</router-link>
-          
-        <router-link to="AboutBi" 
-        class="font-semibold hover:text-teal-400 transition-colors duration-300">BI 소개</router-link>     
-        <router-link to="ContactUs" 
-        class="font-semibold hover:text-teal-400 transition-colors duration-300">오시는길</router-link>
-      </div>
+   <div>aa</div>
+   <div>aa</div>
+   <div>aa</div>
+   <div>aa</div>
+   <div class="col-start-10"></div>
+    <div>aa</div> 
+    <div>aa</div>
+    <div>aa</div>
+    <div class="col-start-10"></div>
+     <div>aa</div>
+    <div>aa</div>
+    <div>aa</div>
+    <!-- <div></div>
+  <div class="justify-self-start col-start-3 col-end-8" >
 
-      <!-- 2열 -->
-      <div class="flex flex-col space-y-3 text-center">
-        <router-link to="CloudFems" 
-        class="font-semibold hover:text-teal-400 transition-colors duration-300">클라우드 FEMS</router-link>
-        <router-link to="CloudMes" 
-        class="font-semibold hover:text-teal-400 transition-colors duration-300">클라우드 MES</router-link>
-      </div>
+  </div> 
+ 
 
-      <!-- 3열 -->
-      <div class="flex flex-col space-y-3 text-center">
-        <router-link to="SmartFactory" 
-        class="font-semibold hover:text-teal-400 transition-colors duration-300">스마트팩토리</router-link>
-        <router-link to="EnergyEfficiency" 
-        class="font-semibold hover:text-teal-400 transition-colors duration-300">에너지효율화</router-link>
-      </div>
-      
-    </div>
+
+  <div></div>
+  <div class="justify-self-start col-start-3 col-end-8" >
+
+      <div class="max-w-5xl mx-auto grid grid-cols-3 gap-y-8 gap-x-20 text-lg text-left">
+    
+       
+          <div class="flex flex-col space-y-3 text-center">
+            <a href="#" 
+              class="font-semibold hover:text-teal-400 transition-colors duration-300">회사소개</a>
+            <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">BI 소개</a>
+            <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">오시는길</a>
+          </div>
+
+     
+          <div class="flex flex-col space-y-3 text-center">
+            <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">클라우드 FEMS</a>
+            <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">클라우드 MES</a>
+          </div>
+
+         
+          <div class="flex flex-col space-y-3 text-center">
+            <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">스마트팩토리</a>
+            <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">에너지효율화</a>
+          </div> 
+    
+        </div>
+    </div> -->
+
   </div>
+
 </transition>
   </div>
 
@@ -136,10 +155,10 @@ defineProps({
   navLinks: {
     type: Array,
     default: () => [
-      { name: "회사소개", url: "/AboutCompany" },
-      { name: "솔루션", url: "" },
-      { name: "주요사업", url: "" },
-      { name: "뉴스", url: "/News" },
+      { name: "회사소개", url: "/about" },
+      { name: "솔루션", url: "/solution" },
+      { name: "주요사업", url: "/business" },
+      { name: "뉴스", url: "/news" },
       { name: "온라인견적", url: "/OnlineQuote/EstimateList" },
     ],
   },
