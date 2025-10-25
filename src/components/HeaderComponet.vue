@@ -19,13 +19,14 @@
     <nav class="justify-center col-start-2 col-end-4" >
       <ul class="grid grid-cols-5 gap-16">
         <li v-for="link in navLinks" :key="link.name">
-          <a
-            :href="link.url"
+          
+          <router-link
+            :to="link.url"
             class="text-white text-2xl font-extrabold no-underline tracking-wide hover:text-teal-400 transition-colors duration-300"
           > 
           
             {{ link.name }}
-          </a>
+          </router-link>
         </li>
       </ul>
     </nav>
@@ -50,24 +51,24 @@
     <nav class="justify-center col-start-2 col-end-4" >
        <ul class="grid grid-cols-5 gap-16">
         <li v-for="link in testLinks1" :key="link.name">
-          <a
-            :href="link.url"
+          <router-link
+            :to="link.url"
             class="text-white text-lg no-underline tracking-wide hover:text-teal-400 transition-colors duration-300"
           > 
             {{ link.name }}
-          </a>
+          </router-link>
         </li>
       </ul> 
     </nav> 
         <nav class="justify-center col-start-2 col-end-4" >
        <ul class="grid grid-cols-5 gap-16">
         <li v-for="link in testLinks2" :key="link.name">
-          <a
-            :href="link.url"
+          <router-link
+            :to="link.url"
             class="text-white text-lg no-underline tracking-wide hover:text-teal-400 transition-colors duration-300"
           > 
             {{ link.name }}
-          </a>
+          </router-link>
         </li>
       </ul> 
     </nav>
@@ -111,10 +112,10 @@ defineProps({
   navLinks: {
     type: Array,
     default: () => [
-      { name: "회사소개", url: "/about" },
-      { name: "솔루션", url: "/solution" },
-      { name: "주요사업", url: "/business" },
-      { name: "뉴스", url: "/news" },
+      { name: "회사소개", url: "/AboutCompany" },
+      { name: "솔루션", url: "" },
+      { name: "주요사업", url: "" },
+      { name: "뉴스", url: "/News" },
       { name: "온라인견적", url: "/OnlineQuote/EstimateList" },
     ],
     },
@@ -122,9 +123,9 @@ defineProps({
   {
     type: Array,
     default: () =>   [
-        { name: "회사소개", url: "/about" },
-      { name: "클라우드 FEMS", url: "/solution" },
-      { name: "스마트팩토리", url: "/business" },
+        { name: "회사소개", url: "/AboutCompany" },
+      { name: "클라우드 FEMS", url: "/CloudFems" },
+      { name: "스마트팩토리", url: "/SmartFactory" },
       
     ]
   },
@@ -132,17 +133,17 @@ defineProps({
   {
     type: Array,
     default: () =>   [
-        { name: "BI소개", url: "/about" },
-      { name: "클라우드 MES", url: "/solution" },
-      { name: "에너지효율화", url: "/business" },
+        { name: "BI소개", url: "/AboutBi" },
+      { name: "클라우드 MES", url: "/CloudMes" },
+      { name: "에너지효율화", url: "/EnergyEfficiency" },
       
-    ]
+    ] 
   },
       testLinks3 : 
   {
     type: Array,
     default: () =>   [
-        { name: "오시는길", url: "/about" },      
+        { name: "오시는길", url: "/ContactUs" },      
     ]
   },
   
