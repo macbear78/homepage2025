@@ -4,7 +4,7 @@
       @mouseleave="hover = false"
     >
   <header
-    class="fixed top-0 left-0 w-full grid grid-cols-10 items-center px-6 md:px-12 py-3 bg-black/90 text-white z-50 backdrop-blur-md"
+    class="fixed top-0 left-0 w-full grid grid-cols-4 items-center px-6 md:px-12 py-3 bg-black/90 text-white z-50 backdrop-blur-md"
   >
 
     <div class="flex items-center space-x-3">
@@ -12,126 +12,82 @@
         <img src="/logo.png" alt="moncat factory" class="h-6" />
       </slot>
     </div>
-    <div>aa</div>
-    <div>aa</div>
-    <div>aa</div>
-    <div>aa</div>
-    <div>aa</div>
+    
+
      <!-- 가운데: 메뉴 -->
     
-    <!-- <nav class="justify-self-start col-start-3 col-end-8" >
-      <ul class="flex space-x-32">
+    <nav class="justify-center col-start-2 col-end-4" >
+      <ul class="grid grid-cols-5 gap-16">
         <li v-for="link in navLinks" :key="link.name">
           <a
             :href="link.url"
-            class="font-semibold hover:text-teal-400 transition-colors duration-300"
+            class="text-white text-2xl font-extrabold no-underline tracking-wide hover:text-teal-400 transition-colors duration-300"
           > 
+          
             {{ link.name }}
           </a>
         </li>
       </ul>
-    </nav> -->
-  <!-- 오른쪽: 버튼 또는 아이콘 -->
-  <!-- <div class="justify-self-end flex space-x-4 col-start-10">
-       <button class="hamburger-menu" @click="toggleMobileMenu">
+    </nav>
+    <div class="justify-self-end">
+        <button class="hamburger-menu" @click="toggleMobileMenu">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
     </button>
-  </div> -->
-    <!-- 모바일용 메뉴 아이콘 -->
-    <!-- <button
-      class="md:hidden flex flex-col justify-center items-center space-y-1"
-      @click="menuOpen = !menuOpen"
-    >
-      <span
-        class="block w-6 h-0.5 bg-white transition-transform duration-300"
-        :class="{ 'rotate-45 translate-y-1.5': menuOpen }"
-      ></span>
-      <span
-        class="block w-6 h-0.5 bg-white transition-opacity duration-300"
-        :class="{ 'opacity-0': menuOpen }"
-      ></span>
-      <span
-        class="block w-6 h-0.5 bg-white transition-transform duration-300"
-        :class="{ '-rotate-45 -translate-y-1.5': menuOpen }"
-      ></span>
-    </button> -->
+</div>
 
-    <!-- 모바일 드롭다운
-    <transition name="slide-fade">
-      <div
-        v-if="menuOpen"
-        class="absolute top-full left-0 w-full bg-black/95 text-center py-4 space-y-4 md:hidden"
-      >
-        <a
-          v-for="link in navLinks"
-          :key="link.name"
-          :href="link.url"
-          class="block text-lg font-semibold hover:text-teal-400 transition"
-        >
-          {{ link.name }}
-        </a>
-      </div>
-    </transition> -->
   </header>
 
       <!-- 숨겨진 화면 -->
         <transition name="slide-fade">
   <div
     v-if="hover" 
-    class="fix top-20 left-0 w-full grid grid-cols-10 items-center px-6 md:px-12 py-3 bg-black/90 text-white z-50 backdrop-blur-md"
+    class="fixed top-20 left-0 w-full grid grid-cols-4 grid-rows-3 items-center px-6 md:px-12 py-10 bg-black/90 text-white z-50 backdrop-blur-md"
     @mouseenter="hover = true"
     @mouseleave="hover = false"
   >
-   <div>aa</div>
-   <div>aa</div>
-   <div>aa</div>
-   <div>aa</div>
-   <div class="col-start-10"></div>
-    <div>aa</div> 
-    <div>aa</div>
-    <div>aa</div>
-    <div class="col-start-10"></div>
-     <div>aa</div>
-    <div>aa</div>
-    <div>aa</div>
-    <!-- <div></div>
-  <div class="justify-self-start col-start-3 col-end-8" >
+    <nav class="justify-center col-start-2 col-end-4" >
+       <ul class="grid grid-cols-5 gap-16">
+        <li v-for="link in testLinks1" :key="link.name">
+          <a
+            :href="link.url"
+            class="text-white text-lg no-underline tracking-wide hover:text-teal-400 transition-colors duration-300"
+          > 
+            {{ link.name }}
+          </a>
+        </li>
+      </ul> 
+    </nav> 
+        <nav class="justify-center col-start-2 col-end-4" >
+       <ul class="grid grid-cols-5 gap-16">
+        <li v-for="link in testLinks2" :key="link.name">
+          <a
+            :href="link.url"
+            class="text-white text-lg no-underline tracking-wide hover:text-teal-400 transition-colors duration-300"
+          > 
+            {{ link.name }}
+          </a>
+        </li>
+      </ul> 
+    </nav>
+        <nav class="justify-center col-start-2 col-end-4" >
+       <ul class="grid grid-cols-5 gap-16">
+        <li v-for="link in testLinks3" :key="link.name">
+          <a
+            :href="link.url"
+            class="text-white text-lg no-underline tracking-wide hover:text-teal-400 transition-colors duration-300"
+          > 
+            {{ link.name }}
+          </a>
+        </li>
+      </ul> 
+    </nav>
+    
+   </div>
 
-  </div> 
+
  
-
-
-  <div></div>
-  <div class="justify-self-start col-start-3 col-end-8" >
-
-      <div class="max-w-5xl mx-auto grid grid-cols-3 gap-y-8 gap-x-20 text-lg text-left">
-    
-       
-          <div class="flex flex-col space-y-3 text-center">
-            <a href="#" 
-              class="font-semibold hover:text-teal-400 transition-colors duration-300">회사소개</a>
-            <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">BI 소개</a>
-            <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">오시는길</a>
-          </div>
-
-     
-          <div class="flex flex-col space-y-3 text-center">
-            <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">클라우드 FEMS</a>
-            <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">클라우드 MES</a>
-          </div>
-
-         
-          <div class="flex flex-col space-y-3 text-center">
-            <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">스마트팩토리</a>
-            <a href="#" class="font-semibold hover:text-teal-400 transition-colors duration-300">에너지효율화</a>
-          </div> 
-    
-        </div>
-    </div> -->
-
-  </div>
 
 </transition>
   </div>
@@ -161,7 +117,35 @@ defineProps({
       { name: "뉴스", url: "/news" },
       { name: "온라인견적", url: "/OnlineQuote/EstimateList" },
     ],
+    },
+   testLinks1 : 
+  {
+    type: Array,
+    default: () =>   [
+        { name: "회사소개", url: "/about" },
+      { name: "클라우드 FEMS", url: "/solution" },
+      { name: "스마트팩토리", url: "/business" },
+      
+    ]
   },
+     testLinks2 : 
+  {
+    type: Array,
+    default: () =>   [
+        { name: "BI소개", url: "/about" },
+      { name: "클라우드 MES", url: "/solution" },
+      { name: "에너지효율화", url: "/business" },
+      
+    ]
+  },
+      testLinks3 : 
+  {
+    type: Array,
+    default: () =>   [
+        { name: "오시는길", url: "/about" },      
+    ]
+  },
+  
 });
 </script>
 
