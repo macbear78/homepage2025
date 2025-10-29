@@ -76,13 +76,15 @@ const currentPage = ref(1);
 const totalPages = ref(1);
 const boardCount = ref(0);
 const pageBlockSize = 10;
-//const last_board_id = ref(0);
-
+const last_board_id = ref(0);
+const boardids = ref([]);
 
 
 onMounted(async() => {
     console.log(totalPages.value);
-    fetchBoardCount();
+    //getMax_Board_id();
+    await getBoard_ids();
+    await fetchBoardCount();
 })
 
 // 현재 블록의 시작 페이지
@@ -112,9 +114,34 @@ const fetchBoardCount = async () => {
     boardCount.value = response.data.count;
     totalPages.value = Math.ceil(boardCount.value / 10);
     console.log('게시글 수:', boardCount.value);
+    console.log(currentPage.value);
     goToPage(currentPage.value);
   } catch (error) {
     console.error('게시글 수 가져오기 실패:', error);
+  }
+}
+
+// const getMax_Board_id = async () => {
+//   try {
+//     const requestCode = "max_read"
+//     const response = await axios.get(`https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/estimate?requestCode=${requestCode}`);
+//     console.log('max_board_id:',response.data);
+//     boardids.value = response.data;
+//     console.log(last_board_id.value);
+//   } catch (error) {
+//     console.error('가져오기 실패:', error);
+//   }
+// }
+
+const getBoard_ids = async () => {
+  try {
+    const requestCode = "readAllBoardIds"
+    const response = await axios.get(`https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/estimate?requestCode=${requestCode}`);
+    console.log(response.data);
+    boardids.value = response.data;
+    console.log(boardids.value.board_ids[0]);
+  } catch (error) {
+    console.error('가져오기 실패:', error);
   }
 }
 
@@ -132,15 +159,19 @@ async function loadData(page) {
     try {
       const requestCode = "multi_read";
       const order = "desc";
-      const limit = 10
-      let startId = boardCount.value - ((page - 1) * limit); 
-      console.log(`${startId}`);
+      const limit = 10;  //마지막건 다음 last_board_id
+      let startId = boardids.value.board_ids[(page - 1) * limit];
+
+      console.log(boardids.value[0]);
       const response = await axios.get(
       `https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/estimate`,
       {
         params: { requestCode, startId, limit, order }
       }
     );
+      boardPagingList.value = response.data;
+      last_board_id.value=response.data[10].board_id;
+      response.data.pop();
       boardPagingList.value = response.data;
       console.log(boardPagingList.value);
     } catch (err) { 
@@ -154,7 +185,7 @@ function fnView(board_id) {
 }
 
 function goToWrite() {
-    router.push({path:'/OnlineQuote/EstimateWrite', query:{board_id:boardCount.value + 1}});  
+    router.push({path:'/OnlineQuote/EstimateWrite', query:{board_id:boardids.value.board_ids[0] + 1}});  
 }
   
         
