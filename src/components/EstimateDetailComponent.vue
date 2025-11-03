@@ -88,6 +88,7 @@ export default {
     this.get_board_id = this.$route.query.board_id;
     if (this.get_board_id) {
       this.loadData(this.get_board_id);
+      this.viewCntUp(this.get_board_id);
     } else {
       console.warn('board_id가 전달되지 않았습니다.');
     }
@@ -146,6 +147,21 @@ export default {
           } catch (error) {
             console.error(error.response?.data || error);
             await this.$swal.fire('삭제에 실패했습니다.', '', 'error');
+          }
+      
+    },
+    async viewCntUp(board_id) {    
+        try{
+            const payload = {
+              board_group: "estimate_request",
+              board_id: board_id,
+              mode: "view"
+            };
+            
+            const response = await axios.put(apiEndpoint_estimate, payload);
+            console.log("response:", response.data);
+          } catch (error) {
+            console.error(error);
           }
       
     }
