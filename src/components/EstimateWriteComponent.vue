@@ -18,7 +18,9 @@
             label="Content"
             v-model="estimate_board.content">
           </v-textarea>
+          <div contenteditable="true" style="width:20rem;height:10rem;"> </div>
         </div>
+        
       </div> 
 
       <div class="mb-3 row">
