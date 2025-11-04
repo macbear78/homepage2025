@@ -33,22 +33,6 @@
           </div>
         </div>
 
-        <!-- ✅ 이미지 표시 영역 -->
-        <div v-if="estimateDetail.image_urls && estimateDetail.image_urls.length" class="mb-4">
-          <label class="col-form-label fw-bold mb-2">첨부 이미지</label>
-          <div class="row g-3">
-            <div v-for="(img, index) in estimateDetail.image_urls" :key="index" class="col-md-4">
-              <img
-                :src="img"
-                alt="첨부 이미지"
-                class="img-fluid rounded shadow-sm border"
-                style="max-height: 250px; object-fit: cover;"
-              />
-            </div>
-          </div>
-        </div>
-
-        <!-- 버튼 영역 -->
         <div class="mb-3 row mt-4">
           <div class="col-4 d-grid p-1">
             <button type="button" class="btn btn-lg btn-dark" @click="goToList">
@@ -71,7 +55,7 @@
               @click="runDelete(estimateDetail.board_id)"
             >
               삭제
-            </button>
+          </button>
           </div>
         </div>
 
@@ -93,7 +77,7 @@ import axios from 'axios';
 const apiEndpoint_estimate =
   'https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/estimate';
 
-export default { 
+export default {
   data() {
     return {
       get_board_id: null,
@@ -129,17 +113,8 @@ export default {
         const result = Array.isArray(response.data)
           ? response.data[0]
           : response.data;
-
-        // ✅ image_urls를 배열로 정리 (문자열일 경우 대비)
-        if (result && result.image_urls && typeof result.image_urls === 'string') {
-          try {
-            result.image_urls = JSON.parse(result.image_urls);
-          } catch {
-            result.image_urls = [result.image_urls];
-          }
-        }
-
         this.estimateDetail = result || {};
+
         console.log('데이터 로드 성공:', this.estimateDetail);
       } catch (err) {
         console.error('데이터 가져오기 실패:', err);
@@ -151,42 +126,46 @@ export default {
       }
     },
     async runDelete(board_id) {
-      const result = await this.$swal.fire({
-        title: '정말 삭제 하시겠습니까?',
-        showCancelButton: true,
-        confirmButtonText: `삭제`,
-        cancelButtonText: `취소`
-      });
+        const result = await this.$swal.fire({
+            title: '정말 삭제 하시겠습니까?',
+            showCancelButton: true,
+            confirmButtonText: `삭제`,
+            cancelButtonText: `취소`
+          });
 
-      if (!result.isConfirmed) return;
+          if (!result.isConfirmed) return;
 
-      try {
-        await axios.delete(apiEndpoint_estimate, {
-          params: {
-            board_group: 'estimate_request',
-            board_id
+          try {
+            await axios.delete('https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/estimate', {
+              params: {
+                board_group: 'estimate_request',
+                board_id: board_id
+              }
+            });
+            await this.$swal.fire('삭제되었습니다!', '', 'success');
+            this.$router.push({path:'/OnlineQuote/EstimateList'});
+          } catch (error) {
+            console.error(error.response?.data || error);
+            await this.$swal.fire('삭제에 실패했습니다.', '', 'error');
           }
-        });
-        await this.$swal.fire('삭제되었습니다!', '', 'success');
-        this.$router.push({ path: '/OnlineQuote/EstimateList' });
-      } catch (error) {
-        console.error(error.response?.data || error);
-        await this.$swal.fire('삭제에 실패했습니다.', '', 'error');
-      }
+      
     },
-    async viewCntUp(board_id) {
-      try {
-        const payload = {
-          board_group: 'estimate_request',
-          board_id,
-          mode: 'view'
-        };
-        const response = await axios.put(apiEndpoint_estimate, payload);
-        console.log('response:', response.data);
-      } catch (error) {
-        console.error(error);
-      }
+    async viewCntUp(board_id) {    
+        try{
+            const payload = {
+              board_group: "estimate_request",
+              board_id: board_id,
+              mode: "view"
+            };
+            
+            const response = await axios.put(apiEndpoint_estimate, payload);
+            console.log("response:", response.data);
+          } catch (error) {
+            console.error(error);
+          }
+      
     }
+
   }
 };
 </script>
@@ -196,11 +175,5 @@ p {
   margin: 0;
   padding: 6px 0;
   line-height: 1.5;
-}
-img {
-  transition: transform 0.2s ease;
-}
-img:hover {
-  transform: scale(1.03);
 }
 </style>

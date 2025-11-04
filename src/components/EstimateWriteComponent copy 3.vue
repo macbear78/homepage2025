@@ -89,7 +89,7 @@ async function getUrl(){
     uploadurlmessage.value = await getPresign('test.png','image/png')
     console.log(uploadurlmessage.value)
     console.log(uploadurlmessage.value.upload_url)
-}
+} 
 
 async function uploadToS3(uploadUrl, file, contentType) {
   // use PUT to presigned URL

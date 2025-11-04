@@ -1,166 +1,117 @@
 <template>
-    <main class="mt-3">
-      <div class="container">
-        <h2 class="text-center">견적 및 질의응답</h2>  
-        <div class="mb-3 row">
-          <label class="col-md-3 col-form-label">제목</label>
-          <div class="col-md-9">
-            <input type="text" class="form-control" v-model="estimateUpdate.title">
-          </div>
-        </div>
-        <div class="mb-3 row">
-          <label class="col-md-3 col-form-label">내용</label>
-          <div class="col-md-9">
-            <div class="input-group mb-3">
-              <v-textarea
-                 class="form-control"  
-                 label="Content"
-                 v-model="estimateUpdate.content">
-                </v-textarea>
+  <main class="mt-3">
+    <div class="container">
+      <h2 class="text-center">견적 및 질의응답 수정</h2>
+
+      <!-- 기존 입력 필드 생략 -->
+      <div class="mb-3 row">
+        <label class="col-md-3 col-form-label">첨부 이미지</label>
+        <div class="col-md-9">
+          <div v-if="imageList.length > 0" class="d-flex flex-wrap">
+            <div v-for="(img, index) in imageList" :key="index" class="m-2 text-center">
+              <img
+                :src="img"
+                alt="첨부 이미지"
+                style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px;"
+              />
+              <div>
+                <button class="btn btn-sm btn-outline-danger mt-1" @click="removeImage(index)">
+                  삭제
+                </button>
+              </div>
             </div>
           </div>
-        </div> 
-        <div class="mb-3 row">
-          <label class="col-md-3 col-form-label">작성자</label>
-          <div class="col-md-9">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" v-model="estimateUpdate.writer">
-            </div>
-          </div>
-        </div>
-        <div class="mb-3 row">
-          <label class="col-md-3 col-form-label">작성날짜</label>
-          <div class="col-md-9">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" v-model="estimateUpdate.wr_date">
-            </div>
-          </div>
-        </div> 
-  
-        <div class="mb-3 row">
-          <div class="col-6 d-grid p-1">
-            <button type="button" class="btn btn-lg btn-dark" @click="goToDetail(this.board_id)">취소하기</button>
-          </div>
-          <div class="col-6 d-grid p-1">
-            <button type="button" class="btn btn-lg btn-danger" @click="EstimateUpdate">저장하기</button>
-          </div>
+          <div v-else class="text-muted">첨부된 이미지가 없습니다.</div>
         </div>
       </div>
-    </main>
+
+      <!-- 수정 저장 버튼 -->
+      <div class="mb-3 row">
+        <div class="col-6 d-grid p-1">
+          <button type="button" class="btn btn-lg btn-dark" @click="goToDetail(board_id)">취소하기</button>
+        </div>
+        <div class="col-6 d-grid p-1">
+          <button type="button" class="btn btn-lg btn-danger" @click="EstimateUpdate">저장하기</button>
+        </div>
+      </div>
+    </div>
+  </main>
 </template>
-  
-<script setup>
-  
-  
-  
-  
-</script>
-  
-  
+
 <script>
-import axios from 'axios';
-const  apiEndpoint_estimate = 'https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/estimate';
-  export default {
-    data() {
-      return {
-        estimateUpdate:{
-        title : "",
-        content : "",
-        writer : "",
-        wr_date : "",
-        },
-        get_estimate_board: {
-        }
-      };
-    },
-    computed: {
-  
-    },
-    created() {
-       this.board_id = this.$route.query.board_id;
-       this.getEstimateDetail();
-    },
-    mounted() {
-  
-    },
-    methods: {
-       async getEstimateDetail() {
-        //let estimateDetail = await this.$api("api/estimateDetail",{param:[this.board_id]});
-        
-        axios({ 
-            url: `${apiEndpoint_estimate}?board_id=${this.board_id}`,
-            method: "GET",
-            data: {
-              boardnum: 10,
+import axios from 'axios'
+const apiEndpoint_estimate =
+  'https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/estimate'
 
-            },
-          }).then(res => {
-            //alert(res.data.message);
-            console.log(res.data);
-            let estimateDetail = res.data;
-            if(estimateDetail.length > 0) {
-              this.get_estimate_board = estimateDetail[0];
-              this.estimateUpdate.title = this.get_estimate_board.title;
-              this.estimateUpdate.content = this.get_estimate_board.content;
-              this.estimateUpdate.writer = this.get_estimate_board.writer;
-              this.estimateUpdate.wr_date = this.get_estimate_board.wr_date;
-              this.estimateUpdate.view_cnt = this.get_estimate_board.view_cnt;
-            }
-        else {
-            console.log('aa');
-            
-        }
-          }).catch(err => {
-            alert(err);
-          });
-        console.log("retrieveData");
-        
-        
-
-        //console.log(this.estimateDetail.title);
+export default {
+  data() {
+    return {
+      board_id: null,
+      estimateUpdate: {
+        title: '',
+        content: '',
+        writer: '',
+        wr_date: '',
       },
-      goToDetail(board_id) { 
-       this.$router.push({path:'/OnlineQuote/EstimateDetail', query:{board_id:board_id}}); 
-      },
-      EstimateUpdate() {
-        this.$swal.fire({
-          title: '정말 수정 하시겠습니까?',
-          showCancelButton: true,
-          confirmButtonText: `생성`,
-          cancelButtonText: `취소`
-        }).then(async (result) => {
-          if (result.isConfirmed) {
-            //this.$api("/api/estimateUpdate",{param:[this.estimateUpdate],where:[this.board_id]});    
-            const board_id = parseInt(this.board_id);
-            const title = this.estimateUpdate.title;
-            const content = this.estimateUpdate.content;
-            const writer = this.estimateUpdate.writer;
-            const wr_date = this.estimateUpdate.wr_date;
-            const view_cnt = parseInt(this.estimateUpdate.view_cnt);
-            axios({
-                  url: apiEndpoint_estimate,
-                  method: "POST",
-                  data: JSON.stringify( {board_id, title, content, writer, wr_date, view_cnt}) //데이터를 json 형식으로 변환
-                }).then(res => {
-                  console.log(res.data);
-                  alert(res);  //결과(보통 성공 메시지)를 알림으로 표시
-                }).catch(err => {
-                  alert(err);
-                });
-            console.log("saveData");  
-            
-            this.$swal.fire('수정되었습니다!', '', 'success');
-            //this.$router.push({path:'/EstimateListPage'});
-          } 
-        });
-      },
-      
-       
-  
+      imageList: [], // 👈 이미지 목록
     }
-  }
-  </script>
-  
-  <style scoped>
-      .tbAdd td textarea{width:100%; min-height:300px; padding:10px; box-sizing:border-box;}
-  </style>
+  },
+  created() {
+    this.board_id = this.$route.query.board_id
+    this.getEstimateDetail()
+  },
+  methods: {
+    async getEstimateDetail() {
+      try {
+        const res = await axios.get(apiEndpoint_estimate, {
+          params: { board_id: this.board_id },
+        })
+        const data = Array.isArray(res.data) ? res.data[0] : res.data
+        this.estimateUpdate = data
+        // image_urls 필드 파싱
+        if (data.image_urls && Array.isArray(data.image_urls)) {
+          this.imageList = data.image_urls.filter((i) => i && !i.NULL).map((i) => i.S || i)
+        } else {
+          this.imageList = []
+        }
+        console.log('불러온 데이터:', data)
+      } catch (err) {
+        console.error('불러오기 실패:', err)
+      }
+    },
+    removeImage(index) {
+      this.imageList.splice(index, 1)
+    },
+    async EstimateUpdate() {
+      const confirm = await this.$swal.fire({
+        title: '정말 수정 하시겠습니까?',
+        showCancelButton: true,
+        confirmButtonText: '수정',
+        cancelButtonText: '취소',
+      })
+      if (!confirm.isConfirmed) return
+
+      const payload = {
+        ...this.estimateUpdate,
+        board_id: parseInt(this.board_id),
+        image_urls: this.imageList, // 👈 이미지 URL 반영
+      }
+
+      try {
+        await axios.post(apiEndpoint_estimate, payload)
+        await this.$swal.fire('수정되었습니다!', '', 'success')
+        this.goToDetail(this.board_id)
+      } catch (err) {
+        console.error(err)
+        this.$swal.fire('수정에 실패했습니다.', '', 'error')
+      }
+    },
+    goToDetail(board_id) {
+      this.$router.push({
+        path: '/OnlineQuote/EstimateDetail',
+        query: { board_id },
+      })
+    },
+  },
+}
+</script>
