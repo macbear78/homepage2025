@@ -149,7 +149,7 @@ export default {
           alert('데이터를 불러오지 못했습니다.');
         }
       }
-    },
+    }, 
     async runDelete(board_id) {
       const result = await this.$swal.fire({
         title: '정말 삭제 하시겠습니까?',
