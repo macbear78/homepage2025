@@ -4,7 +4,7 @@
       @mouseleave="hover = false"
     >
   <header
-    class="fixed top-0 left-0 w-full grid grid-cols-4 items-center px-6 md:px-12 py-3 bg-black/90 text-white z-50 backdrop-blur-md"
+    class="fixed top-0 left-0 w-full grid grid-cols-5 items-center px-6 md:px-12 py-3 bg-black/90 text-white z-50 backdrop-blur-md"
   >
 
     <div class="flex items-center space-x-3">
@@ -16,8 +16,8 @@
 
      <!-- 가운데: 메뉴 -->
     
-    <nav class="justify-center col-start-2 col-end-4" >
-      <ul class="grid grid-cols-5 gap-16">
+    <nav class="justify-center col-start-2 col-end-5" >
+      <ul class="grid grid-cols-6 gap-12">
         <li v-for="link in navLinks" :key="link.name">
           
           <router-link
@@ -44,12 +44,12 @@
         <transition name="slide-fade">
   <div
     v-if="hover" 
-    class="fixed top-20 left-0 w-full grid grid-cols-4 grid-rows-3 items-center px-6 md:px-12 py-10 bg-black/90 text-white z-50 backdrop-blur-md"
+    class="fixed top-20 left-0 w-full grid grid-cols-5 grid-rows-3 items-center px-6 md:px-12 py-10 bg-black/90 text-white z-50 backdrop-blur-md"
     @mouseenter="hover = true"
     @mouseleave="hover = false"
   >
-    <nav class="justify-center col-start-2 col-end-4" >
-       <ul class="grid grid-cols-5 gap-16">
+    <nav class="justify-center col-start-2 col-end-5" >
+       <ul class="grid grid-cols-6 gap-12">
         <li v-for="link in testLinks1" :key="link.name">
           <router-link
             :to="link.url"
@@ -60,8 +60,8 @@
         </li>
       </ul> 
     </nav> 
-        <nav class="justify-center col-start-2 col-end-4" >
-       <ul class="grid grid-cols-5 gap-16">
+        <nav class="justify-center col-start-2 col-end-5" >
+       <ul class="grid grid-cols-6 gap-12">
         <li v-for="link in testLinks2" :key="link.name">
           <router-link
             :to="link.url"
@@ -72,8 +72,8 @@
         </li>
       </ul> 
     </nav>
-        <nav class="justify-center col-start-2 col-end-4" >
-       <ul class="grid grid-cols-5 gap-16">
+        <nav class="justify-center col-start-2 col-end-5" >
+       <ul class="grid grid-cols-6 gap-12">
         <li v-for="link in testLinks3" :key="link.name">
           <a
             :href="link.url"
@@ -117,6 +117,7 @@ defineProps({
       { name: "주요사업", url: "" },
       { name: "뉴스", url: "/News" },
       { name: "온라인견적", url: "/OnlineQuote/EstimateList" },
+      { name: "관리자", url: "/Admin" },
     ],
     },
    testLinks1 : 

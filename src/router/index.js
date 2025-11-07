@@ -13,6 +13,9 @@ import EstimateListComponent from "@/components/EstimateListComponent.vue";
 import EstimateDetailComponent from "@/components/EstimateDetailComponent.vue";
 import EstimateWriteComponent from "@/components/EstimateWriteComponent.vue";
 import EstimateUpdateComponent from "@/components/EstimateUpdateComponent.vue";
+import AdminPage from "@/views/AdminPage.vue";
+import AdminMainComponent from "@/components/admin_board/AdminMainComponent.vue";
+import NewsBoardWriteComponent from "@/components/admin_board/NewsBoardWriteComponent.vue";
 
 const routes = [ 
     {
@@ -82,6 +85,21 @@ const routes = [
         path: "/SmartFactory",   
         name: "SmartFactoryPage",  
         component: SmartFactoryPage,  
+    },
+    {
+        path: "/Admin",   
+        name: "AdminPage",  
+        component: AdminPage, 
+        children: [
+            {
+                path: 'AdminMain', 
+                component: AdminMainComponent
+            },
+            {
+                path: 'NewsboardWrite', 
+                component: NewsBoardWriteComponent
+            },
+        ] 
     },
 ];
 

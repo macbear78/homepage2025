@@ -25,5 +25,5 @@ app.use(store);
 app.use(VueSweetalert2);
 // Make BootstrapVue available throughout your project
 
-app.mount('#app')
+app.mount('#app') 
  
