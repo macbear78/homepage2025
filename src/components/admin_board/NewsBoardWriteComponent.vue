@@ -92,7 +92,7 @@ const apiEndpoint_news_board = 'https://828299ds42.execute-api.ap-northeast-2.am
 
 // ✅ 라우터 인스턴스
 const route = useRoute()
-const router = useRouter()
+const router = useRouter() 
 
 // ✅ 게시글 데이터
 const news_board = ref({
