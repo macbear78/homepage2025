@@ -36,6 +36,12 @@
           <input type="text" class="form-control" v-model="news_board.wr_date">
         </div>
       </div> 
+      <div class="mb-3 row">
+        <label class="col-md-3 col-form-label">news_board_id</label>
+        <div class="col-md-9">
+          <input type="text" class="form-control" v-model="news_board.news_board_id">
+        </div>
+      </div> 
 
       <div class="mb-3 row">
         <div class="col-6 d-grid p-1">
@@ -45,7 +51,7 @@
           <button
             type="button"
             class="btn btn-lg btn-danger"
-            @click="Insert"
+            @click="Insert" 
             :disabled="uploading"
           >
             {{ uploading ? '업로드 중...' : '저장하기' }}
@@ -54,7 +60,7 @@
       </div>
     </div>
     <div>
-      <p>board_id {{ news_board.board_id }}</p>
+      <p>board_id {{ news_board.news_board_id }}</p>
     </div>
   </main>
 
@@ -82,7 +88,7 @@ import { useRoute, useRouter } from 'vue-router'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
-const apiEndpoint_news_board = 'https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/newsBoard'
+const apiEndpoint_news_board = 'https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/news'
 
 // ✅ 라우터 인스턴스
 const route = useRoute()
@@ -90,7 +96,7 @@ const router = useRouter()
 
 // ✅ 게시글 데이터
 const news_board = ref({
-  board_id: null,
+  news_board_id: null,
   title: '',
   content: '',
   writer: '',
@@ -143,7 +149,7 @@ async function Insert() {
 
     const payload = {
       requestCode: 'one_write',
-      board_group: 'newBoard_request',
+      news_board_group: 'news_board_request',
       ...news_board.value
     }
     
@@ -175,7 +181,7 @@ function onFilesSelected(e) {
 }
 
 async function getPresign(filename, contentType) {
-  const res = await fetch(`${API_BASE}/presign`, {
+  const res = await fetch(`${API_BASE}/news/presign`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({ filename, contentType })
@@ -232,3 +238,5 @@ async function uploadImages() {
   box-sizing: border-box;
 }
 </style>
+
+
