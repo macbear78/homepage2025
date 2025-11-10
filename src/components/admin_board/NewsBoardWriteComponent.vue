@@ -118,7 +118,7 @@ const message = ref('')
 
 // ✅ 마운트 시 board_id 설정
 onMounted(() => {
-  news_board.value.board_id = route.query.board_id
+  news_board.value.news_board_id = route.query.board_id
 })
 
 // ✅ 등록 함수
@@ -166,7 +166,7 @@ async function Insert() {
 
 // ✅ 목록으로 이동
 function goToList() {
-  router.push({ path: '/list' })
+  router.push({path:'/Admin/NewsboardList'});
 }
 
 function onFilesSelected(e) {

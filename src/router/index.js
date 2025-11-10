@@ -16,6 +16,9 @@ import EstimateUpdateComponent from "@/components/EstimateUpdateComponent.vue";
 import AdminPage from "@/views/AdminPage.vue";
 import AdminMainComponent from "@/components/admin_board/AdminMainComponent.vue";
 import NewsBoardWriteComponent from "@/components/admin_board/NewsBoardWriteComponent.vue";
+import NewsBoardListComponent from "@/components/admin_board/NewsBoardListComponent.vue";
+import NewsBoardDetailComponent from "@/components/admin_board/NewsBoardDetailComponent.vue";
+import NewsBoardUpdateComponent from "@/components/admin_board/NewsBoardUpdateComponent.vue";
 
 const routes = [ 
     {
@@ -98,6 +101,18 @@ const routes = [
             {
                 path: 'NewsboardWrite', 
                 component: NewsBoardWriteComponent
+            },
+            {
+                path: 'NewsboardList', 
+                component: NewsBoardListComponent
+            },
+            {
+                path: 'NewsboardDetail', 
+                component: NewsBoardDetailComponent
+            },
+            {
+                path: 'NewsboardUpdate', 
+                component: NewsBoardUpdateComponent
             },
         ] 
     },
