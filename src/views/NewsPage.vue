@@ -1,7 +1,10 @@
 <template>
-  <img :src="desktopImg" alt="Desktop" />
+  <h2>뉴스</h2>
+  <router-view></router-view>
 </template>
 
 <script setup>
-import desktopImg from '@/assets/Desktop-3.png'
+import { RouterView } from 'vue-router';
+
+
 </script>

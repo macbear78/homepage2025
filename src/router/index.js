@@ -7,6 +7,7 @@ import CloudMesPage from "@/views/CloudMesPage.vue";
 import ContactUsPage from "@/views/ContactUsPage.vue";
 import EnergyEfficiencyPage from "@/views/EnergyEfficiencyPage.vue";
 import NewsPage from "@/views/NewsPage.vue";
+import NewCardListComponet from "@/components/NewCardListComponet.vue";
 import OnlineQuotePage from "@/views/OnlineQuotePage.vue";
 import SmartFactoryPage from "@/views/SmartFactoryPage.vue";
 import EstimateListComponent from "@/components/EstimateListComponent.vue";
@@ -59,7 +60,13 @@ const routes = [
     {
         path: "/News",   
         name: "NewsPage",  
-        component: NewsPage,  
+        component: NewsPage, 
+        children: [
+            {
+                path: 'NewsCardList',
+                component: NewCardListComponet
+            },
+        ]    
     },
     {
         path: "/OnlineQuote",   

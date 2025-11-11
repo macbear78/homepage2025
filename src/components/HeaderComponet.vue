@@ -115,7 +115,7 @@ defineProps({
       { name: "회사소개", url: "/AboutCompany" },
       { name: "솔루션", url: "" },
       { name: "주요사업", url: "" },
-      { name: "뉴스", url: "/News" },
+      { name: "뉴스", url: "/News/NewsCardList" },
       { name: "온라인견적", url: "/OnlineQuote/EstimateList" },
       { name: "관리자", url: "/Admin" },
     ],
