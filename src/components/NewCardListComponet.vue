@@ -5,9 +5,9 @@
     <!-- 카드 리스트 -->
     <div class="cards">
       <NewsCardComponent
-        v-for="item in paginatedNews"
+        v-for="item in newsList"
         :key="item.news_board_id"
-        :imageUrl="item.imageUrl || '/assets/default.png'"
+        :imageUrl="item.image_urls || '/assets/default.png'"
         :tag="item.tag || 'news'"
         :tagColor="item.tagColor || 'green'"
         :date="item.date || item.wr_date"
@@ -56,77 +56,124 @@ import NewsCardComponent from '@/components/NewsCardComponent.vue'
 // --------------------
 // 상태 변수
 // --------------------
-const newsList = ref([])
-const currentPage = ref(1)
-const itemsPerPage = 9       // 3x3 그리드
-const pagesPerBlock = 5
+const newsList = ref([]);
+const currentPage = ref(1);
+const totalPages = ref(1);
+const boardCount = ref(0);
+const pageBlockSize = 10;
+const last_board_id = ref(0); 
+const boardids = ref([]);
 
-// --------------------
-// Lambda에서 데이터 가져오기
-// --------------------
-const getNewsList = async () => {
+
+onMounted(async () => {
+      console.log(totalPages.value);
+    //getMax_Board_id();
+    await getBoard_ids();
+    await fetchBoardCount();
+})
+ 
+// 현재 블록의 시작 페이지
+const startPage = computed(() => {
+  return Math.floor((currentPage.value - 1) / pageBlockSize) * pageBlockSize + 1;
+});
+
+// 현재 블록의 끝 페이지
+const endPage = computed(() => {
+  return Math.min(startPage.value + pageBlockSize - 1, totalPages.value);
+});
+
+// 현재 블록에 표시할 페이지 배열
+const pagesInBlock = computed(() => {
+  const pages = [];
+  for (let i = startPage.value; i <= endPage.value; i++) {
+    pages.push(i);
+  }
+  return pages;
+});
+  
+// 페이지 로드 시 실행
+const fetchBoardCount = async () => {
   try {
-    const response = await axios.get(
-      'https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/news',
-      { params: { requestCode: 'multi_read', startId: 0, limit: 100, order: 'desc' } } // 전체 가져온 후 페이지네이션 처리
-    )
-    newsList.value = response.data.map(item => ({
+    const requestCode = "getBoardCount"
+    const response = await axios.get(`https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/news?requestCode=${requestCode}`);
+    boardCount.value = response.data.count;
+    totalPages.value = Math.ceil(boardCount.value / 10);
+    console.log('게시글 수:', boardCount.value);
+    console.log(currentPage.value);
+    goToPage(currentPage.value);
+  } catch (error) {
+    console.error('게시글 수 가져오기 실패:', error);
+  }
+}
+
+const getMax_Board_id = async () => {
+  try {
+    const requestCode = "max_read"
+    const response = await axios.get(`https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/news?requestCode=${requestCode}`);
+    console.log('max_board_id:',response.data);
+    boardids.value = response.data;
+  } catch (error) {
+    console.error('가져오기 실패:', error);
+  }
+}
+
+const getBoard_ids = async () => {
+  try {
+    const requestCode = "readAllBoardIds"
+    const response = await axios.get(`https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/news?requestCode=${requestCode}`);
+    console.log(response.data);
+    boardids.value = response.data; 
+    console.log(boardids.value.news_board_ids[0]);
+  } catch (error) {
+    console.error('가져오기 실패:', error);
+  }
+}
+
+async function goToPage(page) { 
+  if (page < 1 || page > totalPages.value) return;
+  currentPage.value = page;
+  console.log(`📄 페이지 이동: ${page}`);
+  // 실제 데이터 다시 읽기
+  await loadData(page);
+}
+async function loadData(page) {
+    // 예: axios 호출
+    console.log(`페이지 ${page} 데이터 로드`);
+    // axios.get(`https://api.../items?page=${page}`)
+    try {
+      const requestCode = "multi_read"; 
+      const order = "desc";
+      const limit = 10;  //마지막건 다음 last_board_id
+      let startId = boardids.value.news_board_ids[(page - 1) * limit];
+      console.log(boardids.value[0]);
+      const response = await axios.get(
+        `https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/news`,
+        {
+          params: { requestCode, startId, limit, order }
+        }
+      ); 
+
+      newsList.value = response.data.map(item => ({
       ...item,
       imageUrl: item.imageUrl || '',
       tag: 'news',
       tagColor: 'green',
-    }))
-  } catch (err) {
-    console.error('뉴스 목록 불러오기 실패:', err)
-  }
+      }))
+      console.log(newsList.value);
+      console.log(newsList.value);           
+    } catch (err) { 
+      console.error('데이터 가져오기 실패:', err) 
+    }
+}
+          
+function fnView(board_id) { 
+    router.push({path:'/Admin/NewsboardDetail', query:{board_id:board_id}}); 
+       
 }
 
-onMounted(async () => {
-  await getNewsList()
-})
- 
-// --------------------
-// 페이지네이션 계산
-// --------------------
-const totalPages = computed(() => Math.ceil(newsList.value.length / itemsPerPage))
-const totalBlocks = computed(() => Math.ceil(totalPages.value / pagesPerBlock))
-const currentPageBlock = computed(() => Math.ceil(currentPage.value / pagesPerBlock))
-const startPage = computed(() => (currentPageBlock.value - 1) * pagesPerBlock + 1)
-const endPage = computed(() => Math.min(startPage.value + pagesPerBlock - 1, totalPages.value))
-const pageNumbers = computed(() => Array.from({ length: endPage.value - startPage.value + 1 }, (_, i) => startPage.value + i))
-const paginatedNews = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage
-  return newsList.value.slice(start, start + itemsPerPage)
-})
-
-// --------------------
-// 페이지 이동
-// --------------------
-const goToPage = (page) => {
-  if (page < 1 || page > totalPages.value) return
-  currentPage.value = page
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
-const goToPrevBlock = () => {
-  const prevBlockFirstPage = (currentPageBlock.value - 2) * pagesPerBlock + 1
-  if (prevBlockFirstPage > 0) currentPage.value = prevBlockFirstPage
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
-const goToNextBlock = () => {
-  const nextBlockFirstPage = currentPageBlock.value * pagesPerBlock + 1
-  if (nextBlockFirstPage <= totalPages.value) currentPage.value = nextBlockFirstPage
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
-// --------------------
-// 상세 페이지 이동
-// --------------------
-const openArticle = (item) => {
-  router.push({ path: '/news-detail', query: { id: item.news_board_id } })
-}
 </script>
+
+
 
 <style scoped>
 .news-list {
