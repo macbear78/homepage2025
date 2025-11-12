@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import App from './App.vue'
 import './assets/main.css' // ✅ Tailwind CSS 불러오기
 import router from './router'  // router import
@@ -18,6 +19,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 // 위 createApp 코드 아래처럼 변경
 const app = createApp(App)
+app.use(createPinia())  // 추가!
 app.use(router)  // router 추가
 app.use(vuetify)
 app.mixin(mixins)

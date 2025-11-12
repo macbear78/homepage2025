@@ -49,10 +49,13 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { useNewsStore } from '@/stores/newsStore'
 import router from '@/router'
 import axios from 'axios'
 import NewsCardComponent from '@/components/NewsCardComponent.vue'
 
+
+const store = useNewsStore()
 // --------------------
 // 상태 변수
 // --------------------
@@ -166,9 +169,9 @@ async function loadData(page) {
     }
 }
           
-function fnView(board_id) { 
-    router.push({path:'/Admin/NewsboardDetail', query:{board_id:board_id}}); 
-       
+function openArticle(item) {
+  store.setArticle(item) // 전역 저장
+  router.push('/News/NewsCardDetail') // 이동
 }
 
 </script>
