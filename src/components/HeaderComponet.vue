@@ -75,12 +75,12 @@
         <nav class="justify-center col-start-2 col-end-5">
           <ul class="grid grid-cols-6 gap-12">
             <li v-for="link in testLinks3" :key="link.name">
-              <a
-                :href="link.url"
+              <router-link
+                :to="link.url"
                 class="menu-link text-white text-lg no-underline tracking-wide"
               >
                 {{ link.name }}
-              </a>
+              </router-link>
             </li>
           </ul>
         </nav>
