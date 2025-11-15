@@ -38,6 +38,11 @@
       </button>
     </div>
   </section>
+  <div class="md:w-1/2 relative mt-16 md:mt-0">
+      <v-imag>
+        <img src="https://my-moncatfactory-bucket.s3.ap-northeast-2.amazonaws.com/main_page/page_image004.png" alt="Moncat Factory" class="w-full h-auto" />
+      </v-imag>
+    </div>
 </template>
 
 <script setup>

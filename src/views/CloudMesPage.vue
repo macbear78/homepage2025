@@ -10,11 +10,10 @@
 
 <script setup>
 import desktopImg from '@/assets/Desktop-1.png'
-import titleImg from '@/assets/baner02.png' // <- 추가
 import PageInHeaderComponet from '@/components/PageInHeaderComponet.vue';
 
-const item = {
-  titleImg, // import한 이미지를 넣기
+const item = { 
+  titleImg: 'https://my-moncatfactory-bucket.s3.ap-northeast-2.amazonaws.com/sub_header/header_image002.png',
   selNum: 1, 
   menu: [
     { name: '클라우드FEMS', path: '/CloudFems' },

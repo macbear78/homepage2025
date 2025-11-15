@@ -25,11 +25,11 @@
 
     <!-- 오른쪽 배경 이미지 -->
     <div class="relative w-full md:w-1/2 h-[300px] md:h-full">
-      <img
-        src="@/assets/images/mes_bg.png"
-        alt="Cloud MES Background"
-        class="absolute inset-0 w-full h-full object-cover"
-      />
+          <div class="md:w-1/2 relative mt-16 md:mt-0">
+      <v-imag>
+        <img src="https://my-moncatfactory-bucket.s3.ap-northeast-2.amazonaws.com/main_page/page_image003.png" alt="Moncat Factory" class="w-full h-auto" />
+      </v-imag>
+    </div>
       <div class="absolute inset-0 bg-black/30"></div>
     </div>
   </section>

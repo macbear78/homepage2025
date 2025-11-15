@@ -1,5 +1,5 @@
 <template>
-  <H1>ADFADFSA</H1>
+  <h1>ADFADFSA</h1>
 
   <div class="relative w-full h-64 md:h-80 lg:h-96">
     <!-- 배경 이미지 -->
