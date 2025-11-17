@@ -10,12 +10,18 @@
     <section ref="title2Ref" class="bg-white">
       <Title2Component />
     </section>
+    <!-- moncat factory solution 섹션 -->
+    <section class="bg-white w-full h-[2000px]">
+      <div class="bg-gray-200 w-full h-[300px]">
+        <h2>Moncat Factory Solution</h2>
+        <!-- 여기에 내용 삽입 가능 -->
+         <TitleSub1Component/>
+         <TitleSub2Component/>
+         <TitleSub3Component/>
+         <TitleSub4Component/>   
+      </div>
+    </section>
 
-    <!-- 나머지 섹션들 -->
-    <section class="h-screen"><TitleSub1Component /></section>
-    <section class="h-screen"><TitleSub2Component /></section>
-    <section class="h-screen"><TitleSub3Component /></section>
-    <section class="h-screen"><TitleSub4Component /></section>
   </div>
 </template>
 

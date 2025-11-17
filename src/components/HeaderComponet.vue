@@ -9,10 +9,15 @@
     >
       <!-- 왼쪽 로고 -->
       <div class="flex items-center space-x-3">
-        <slot name="left">
-          <img src="/logo.png" alt="moncat factory" class="h-6" />
-        </slot>
+          <router-link to="/main">
+            <img 
+              src="https://my-moncatfactory-bucket.s3.ap-northeast-2.amazonaws.com/logo001.png" 
+              alt="moncat factory" 
+              class="h-6 cursor-pointer"
+            />
+          </router-link>
       </div>
+
 
       <!-- 가운데 메뉴 -->
       <nav class="justify-center col-start-2 col-end-5">

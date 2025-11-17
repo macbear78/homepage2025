@@ -1,66 +1,129 @@
 <template>
-  <section class="py-16 text-center">
-    <h2 class="text-4xl font-bold mb-12">몬캣팩토리 뉴스</h2>
+  <section class="flex flex-col gap-6 p-4">
+    <h2 class="text-2xl font-bold text-center">몬캣팩토리 뉴스</h2>
 
-    <!-- 뉴스 카드 3개 -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-8">
+    <!-- 카드 리스트 -->
+    <div class="flex justify-center">
       <div
-        v-for="(news, index) in newsList"
-        :key="index"
-        class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-all"
+        class="grid w-full max-w-6xl gap-6
+               [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]
+               place-items-center"
       >
-        <img :src="news.image" alt="" class="w-full h-52 object-cover" />
-        <div class="p-6 text-left">
-          <div class="flex justify-between items-center mb-2">
-            <span class="bg-emerald-500 text-white text-sm px-3 py-1 rounded-full">
-              news
-            </span>
-            <span class="text-gray-500 text-sm">{{ news.date }}</span>
-          </div>
-          <p class="font-semibold text-lg leading-snug line-clamp-2">
-            {{ news.title }}
-          </p>
+        <div
+          v-for="item in newsList"
+          :key="item.news_board_id"
+          class="w-full max-w-sm"
+        >
+          <NewsCardComponent
+            :imageUrl="item.image_urls || '/assets/default.png'"
+            :tag="item.tag || 'news'"
+            :tagColor="item.tagColor || 'green'"
+            :date="item.date || item.wr_date"
+            :title="item.title"
+            :excerpt="item.excerpt || item.content"
+            @click="openArticle(item)"
+          />
         </div>
       </div>
     </div>
 
-    <!-- 버튼 영역 -->
-    <div class="mt-12 flex flex-col items-center space-y-4">
-      <button
-        class="px-10 py-3 rounded-full border border-gray-300 hover:bg-gray-100 transition"
-      >
-        View More
-      </button>
+    <v-btn>
+      <router-link to="/news/NewsCardList">더보기</router-link>
+    </v-btn>
 
-    </div> 
   </section>
 </template>
 
+
 <script setup>
-const newsList = [
-  {
-    image: "/news1.jpg",
-    date: "23.11.21",
-    title: "전남대불산업단지, 에너지 자립형 산업단지 수립 위한 스마트에너지플랫폼...",
-  },
-  {
-    image: "/news2.jpg",
-    date: "23.10.23",
-    title: "유호스트, 2023 베트남 인공지능의 날(AI4N) 전시회 참석",
-  },
-  {
-    image: "/news3.jpg",
-    date: "23.10.23",
-    title: "중부발전, 천안산단 스마트에너지플랫폼 구축 우협 선정",
-  },
-];
+import { ref, computed, onMounted } from 'vue'
+import { useNewsStore } from '@/stores/newsStore'
+import router from '@/router'
+import axios from 'axios'
+import NewsCardComponent from '@/components/NewsCardComponent.vue'
+
+const store = useNewsStore()
+const newsList = ref([])
+const currentPage = ref(1)
+const totalPages = ref(1)
+const boardCount = ref(0)
+const pageBlockSize = 10
+const boardids = ref([])
+
+onMounted(async () => {
+  await getBoard_ids()
+  await fetchBoardCount()
+})
+
+const startPage = computed(() => {
+  return Math.floor((currentPage.value - 1) / pageBlockSize) * pageBlockSize + 1
+})
+const endPage = computed(() => {
+  return Math.min(startPage.value + pageBlockSize - 1, totalPages.value)
+})
+const pageNumbers = computed(() => {
+  const pages = []
+  for (let i = startPage.value; i <= endPage.value; i++) pages.push(i)
+  return pages
+})
+
+const fetchBoardCount = async () => {
+  try {
+    const requestCode = 'getBoardCount'
+    const res = await axios.get(
+      `https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/news?requestCode=${requestCode}`
+    )
+    boardCount.value = res.data.count
+    totalPages.value = Math.ceil(boardCount.value / 10)
+    goToPage(currentPage.value)
+  } catch (e) {
+    console.error('게시글 수 가져오기 실패:', e)
+  }
+}
+
+const getBoard_ids = async () => {
+  try {
+    const requestCode = 'readAllBoardIds'
+    const res = await axios.get(
+      `https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/news?requestCode=${requestCode}`
+    )
+    boardids.value = res.data
+  } catch (e) {
+    console.error('가져오기 실패:', e)
+  }
+}
+
+async function goToPage(page) {
+  if (page < 1 || page > totalPages.value) return
+  currentPage.value = page
+  await loadData(page)
+}
+
+async function loadData(page) { 
+  try {
+    const requestCode = 'multi_read'
+    const order = 'desc'
+    const limit = 3
+    const startId = boardids.value.news_board_ids[(page - 1) * limit]
+    const res = await axios.get(
+      `https://828299ds42.execute-api.ap-northeast-2.amazonaws.com/MyWebApp-APIstage/news`,
+      {
+        params: { requestCode, startId, limit, order }
+      }
+    )
+    newsList.value = res.data.map(item => ({
+      ...item,
+      tag: 'news',
+      tagColor: 'green'
+    }))
+  } catch (e) {
+    console.error('데이터 가져오기 실패:', e)
+  }
+}
+
+function openArticle(item) {
+  store.setArticle(item)
+  router.push('/News/NewsCardDetail')
+}
 </script>
 
-<style scoped>
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-</style>
