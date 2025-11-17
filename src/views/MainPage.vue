@@ -7,7 +7,7 @@
     </section>
 
     <!-- 두 번째 섹션 -->
-    <section ref="title2Ref" class="h-screen bg-white flex items-center justify-center">
+    <section ref="title2Ref" class="bg-white">
       <Title2Component />
     </section>
 
