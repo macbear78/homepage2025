@@ -5,7 +5,7 @@
     :selNum="item.selNum"
     :menu="item.menu"
   />
-  <div class="container bg-gray-300">
+  <div class="container">
     <h4>클라우드FEMS</h4>
     <v-text>
       <p>당사의 클라우드 FEMS는 국내 최초 SaaS기반의 공장에너지 관리시스템으로 에너지 다소비 공장의 에너지 정보를 수집하고

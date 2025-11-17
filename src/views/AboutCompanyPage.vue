@@ -5,13 +5,20 @@
     :selNum="item.selNum"
     :menu="item.menu"
   />
-  <img :src="desktopImg" alt="Desktop" />
+
+      <v-img
+      src="https://my-moncatfactory-bucket.s3.ap-northeast-2.amazonaws.com/company/page_image001.png"
+      width="100%"/>
+
+            <v-img
+      src="https://my-moncatfactory-bucket.s3.ap-northeast-2.amazonaws.com/company/page_image002.png"
+      width="100%"/>
   
 </template>
 
 
 <script setup>
-import desktopImg from '@/assets/Desktop-6.png'
+
 import PageInHeaderComponet from '@/components/PageInHeaderComponet.vue';
 
 const item = {
