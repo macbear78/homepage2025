@@ -1,7 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import MainPage from "@/views/MainPage.vue";
 import AboutCompanyPage from "@/views/AboutCompanyPage.vue";
-import AboutBiPage from "@/views/AboutBiPage.vue";
+import OrganizationPage from "@/views/OrganizationPage.vue";
 import CloudFemsPage from "@/views/CloudFemsPage.vue";
 import CloudMesPage from "@/views/CloudMesPage.vue";
 import ContactUsPage from "@/views/ContactUsPage.vue";
@@ -29,11 +29,11 @@ const routes = [
         component: MainPage,  
     },
     {
-        path: "/AboutBi",  
-        name: "AboutBiPage",  
-        component: AboutBiPage, 
+        path: "/Organization",  
+        name: "OrganizationPage",  
+        component: OrganizationPage, 
     },
-    {
+    { 
         path: "/AboutCompany",  
         name: "AboutCompanyPage",  
         component: AboutCompanyPage, 

@@ -93,6 +93,7 @@
 
   </div>
 
+  <HistoryComponent/>
 
   <!-- Client & Partner -->
   <div class="mt-10">
@@ -110,6 +111,7 @@
 </div>
 
 
+
  
   
 </template>
@@ -118,13 +120,14 @@
 <script setup>
 import { ref } from 'vue'
 import PageInHeaderComponet from '@/components/PageInHeaderComponet.vue';
+import HistoryComponent from '@/components/HistoryComponent.vue';
 
 const item = {
   titleImg : 'https://my-moncatfactory-bucket.s3.ap-northeast-2.amazonaws.com/sub_header/header_image001.png', 
   selNum: 0, 
   menu: [  
     { name: '회사소개', path: '/AboutCompany' },
-    { name: 'BI 소개', path: '/AboutBi' },
+    { name: '조 직 도', path: '/Organization' },
     { name: '오시는길', path: '/ContactUs' },
   ]
 }
@@ -161,4 +164,21 @@ const clients_partners_img = ref([
   'https://my-moncatfactory-bucket.s3.ap-northeast-2.amazonaws.com/client_and_partner/image+127.png'  
   ]);
 </script> 
+
+
+<style>
+section {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 0;
+    margin: 0; 
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+
+
+</style>
  

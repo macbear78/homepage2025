@@ -29,7 +29,7 @@ const item = {
   selNum: 2,
   menu: [
     { name: '회사소개', path: '/AboutCompany' },
-    { name: 'BI 소개', path: '/AboutBi' },
+    { name: '조 직 도', path: '/Organization' },
     { name: '오시는길', path: '/ContactUs' },
   ]
 } 

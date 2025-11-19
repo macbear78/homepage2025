@@ -113,8 +113,8 @@ const testLinks1 = [
   { name: "클라우드 FEMS", url: "/CloudFems" },
   { name: "스마트팩토리", url: "/SmartFactory" },
 ];
-const testLinks2 = [
-  { name: "BI소개", url: "/AboutBi" },
+const testLinks2 = [ 
+  { name: "조직도", url: "/Organization" },
   { name: "클라우드 MES", url: "/CloudMes" },
   { name: "에너지효율화", url: "/EnergyEfficiency" },
 ];
