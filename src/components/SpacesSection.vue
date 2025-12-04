@@ -77,7 +77,7 @@ import Space_4_CardComponet from '@/components/SpaceCard_4_Componet.vue'
 import Space_5_CardComponet from '@/components/SpaceCard_5_Componet.vue'
 import Space_6_CardComponet from '@/components/SpaceCard_6_Componet.vue'
 import Space_7_CardComponet from '@/components/SpaceCard_7_Componet.vue'
-import Space_8_CardComponet from '@/components/SpaceCard_8_Componet.vue'
+import Space_8_CardComponet from '@/components/SpaceCardComponet.vue'
 
 </script>
 
