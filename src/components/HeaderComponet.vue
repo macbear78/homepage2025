@@ -10,18 +10,20 @@
         </div>
 
         <!-- 데스크탑 메뉴 -->
-        <nav class="hidden sm:flex col-span-6 sm:col-span-6 lg:col-span-8 justify-start space-x-24">
-          <router-link :to="'/'" class="text-black text-2xl font-extrabold no-underline tracking-wide">
-              회사정보</router-link>
-          <router-link :to="'/'" class="text-black text-2xl font-extrabold no-underline tracking-wide">
-              서비스</router-link>
-          <router-link :to="'/'" class="text-black text-2xl font-extrabold no-underline tracking-wide">
-              지원사업</router-link>
-          <router-link :to="'/'" class="text-black text-2xl font-extrabold no-underline tracking-wide">
-              뉴스</router-link>
-          <router-link :to="'/'" class="text-black text-2xl font-extrabold no-underline tracking-wide">
-              고객지원</router-link>    
-        </nav>
+        <div class="hidden sm:flex col-span-6 sm:col-span-6 lg:col-span-8 justify-start space-x-24">
+          <div class="grid grid-cols-5 gap-4 w-full">
+            <router-link :to="'/'" class="text-black text-2xl font-extrabold no-underline tracking-wide">
+                회사정보</router-link>
+            <router-link :to="'/'" class="text-black text-2xl font-extrabold no-underline tracking-wide">
+                서비스</router-link>
+            <router-link :to="'/'" class="text-black text-2xl font-extrabold no-underline tracking-wide">
+                지원사업</router-link>
+            <router-link :to="'/'" class="text-black text-2xl font-extrabold no-underline tracking-wide">
+                뉴스</router-link>
+            <router-link :to="'/'" class="text-black text-2xl font-extrabold no-underline tracking-wide">
+                고객지원</router-link>  
+          </div>  
+        </div>
         <div class="flex col-span-2 justify-center space-x-8">
             <img src="https://nepic-s3-data-homepage-bucket.s3.ap-northeast-2.amazonaws.com/images/blog.png" alt="" class="h-8" />
             <img src="https://nepic-s3-data-homepage-bucket.s3.ap-northeast-2.amazonaws.com/images/youtube.png" alt="" class="h-8" />
@@ -53,6 +55,55 @@
         </div>
 
       </div>
+
+      <div
+        name="b"
+        class="grid bg-white grid-cols-6 sm:grid-cols-8 lg:grid-cols-12 items-center h-48 gap-4 relative z-10 transition-all duration-300"
+
+      >
+        <div class="flex col-span-2"></div>
+        <div class="hidden sm:flex col-span-6 sm:col-span-6 lg:col-span-8 justify-start space-x-24">
+            <!-- 내부를 5등분하는 그리드 -->
+            <div class="grid grid-cols-5 gap-4 w-full">
+              <div class="bg-red-200 flex flex-col">
+                     <router-link :to="'/AboutCompany'" class="text-black no-underline">
+                        회사소개</router-link>
+                     <router-link :to="'/'" class="text-black no-underline">
+                        조직도</router-link>
+                     <router-link :to="'/'" class="text-black no-underline">
+                        오시는길</router-link>
+              </div>
+              <div class="bg-blue-200 flex flex-col">
+                    <router-link :to="'/'" class="text-black no-underline">
+                        MES&ERP</router-link>
+                     <router-link :to="'/'" class="text-black no-underline">
+                        IoT구축</router-link>
+                     <router-link :to="'/'" class="text-black no-underline">
+                        스마트공방</router-link>
+
+              </div>
+              <div class="bg-green-200 flex flex-col">
+                    <router-link :to="'/'" class="text-black no-underline">
+                        중기청</router-link>
+                     <router-link :to="'/'" class="text-black no-underline">
+                        바우처</router-link>
+
+              </div>
+              <div class="bg-yellow-200 flex flex-col">
+                    <router-link :to="'/'" class="text-black no-underline">
+                        뉴스</router-link>
+              </div>
+              <div class="bg-purple-200 flex flex-col">
+                    <router-link :to="'/'" class="text-black no-underline">
+                        고객지원</router-link>
+              </div> 
+            </div>
+
+          
+              
+        </div>
+      </div>
+
     
   </header>
 </template>
@@ -61,11 +112,28 @@
 import { ref } from "vue";
 
 const mobileMenu = ref(false);
+const isHover = ref(false);
+
+
 </script>
 
 <style scoped>
 /* 헤더 높이 확보 */
 body {
   padding-top: 80px;
+}
+/* slide + fade 트랜지션 */
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 1.0s ease;
+}
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+
+  transform: translateY(-200px);
+}
+.slide-fade-enter-to,
+.slide-fade-leave-from {
+  transform: translateY(0);
 }
 </style>
