@@ -23,7 +23,7 @@
         <!-- 텍스트 박스 -->
         <div class="absolute bottom-40 left-10 flex flex-col items-start">
           <div class="relative">
-            <!-- 제목 -->
+            <!-- 제목 --> 
             <transition name="slide-left">
               <h2
                 v-if="titleVisible[i]"
