@@ -10,17 +10,10 @@
     <section ref="title2Ref" class="bg-white">
       <Title2Component />
     </section>
-    <!-- moncat factory solution 섹션 -->
-    <section class="bg-white w-full h-[2000px]">
-      <div class="bg-gray-200 w-full h-[300px]">
-        <h2>Moncat Factory Solution</h2>
-        <!-- 여기에 내용 삽입 가능 -->
-         <TitleSub1Component/>
-         <TitleSub2Component/>
-         <TitleSub3Component/>
-         <TitleSub4Component/>   
-      </div>
-    </section>
+
+    <TitleSub1Component/>
+    <TitleSub2Component/>
+    <TitleSub3Component/>   
 
   </div>
 </template>
@@ -32,7 +25,6 @@ import Title2Component from '@/components/Title2Component.vue'
 import TitleSub1Component from '@/components/TitleSub1Component.vue'
 import TitleSub2Component from '@/components/TitleSub2Component.vue'
 import TitleSub3Component from '@/components/TitleSub3Component.vue'
-import TitleSub4Component from '@/components/TitleSub4Component.vue'
 
 // 각 섹션 참조
 const title2Ref = ref(null)

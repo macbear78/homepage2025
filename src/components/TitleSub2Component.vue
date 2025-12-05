@@ -1,41 +1,91 @@
 <template>
-  <v-card class="mx-auto my-12 bg-black text-white" max-width="1200" rounded="xl">
-    <v-row no-gutters>
-
-
-      <!-- 텍스트 영역 -->
-      <v-col cols="12" md="4" class="p-6 flex flex-col justify-between">
-        <div> 
-          <v-card-title class="text-white text-2xl font-bold">Cloud MES</v-card-title>
-          <v-card-subtitle class="text-teal-400 mb-4">
-            IoT 기반 생산정보/품질/설비 관리시스템
-          </v-card-subtitle>
-
-          <v-card-text class="space-y-2 text-gray-200">
-            <div>· 생산현황의 전반적인 실시간 모니터링 관리</div>
-            <div>· 계획대비 실적관리를 통한 목표관리</div>
-            <div>· 설비, 금형 등 기타 부수적 자원의 생산정보 관리</div>
-            <div>· 설비, 금형, 치공구등 사용자원의 보전관리</div>
-            <div>· 인터넷을 통한 다양한 장비에서 MES 사용가능</div>
-          </v-card-text>
-        </div>
-
-        <v-card-actions>
-          <v-btn color="teal" class="mt-4" rounded>자세히보기</v-btn>
-        </v-card-actions>
-      </v-col>
-
-      <!-- 이미지 영역 -->
-      <v-col cols="12" md="8">
+  <div
+    class="grid bg-white grid-cols-6 sm:grid-cols-8 lg:grid-cols-12 items-center h-[800px] gap-4 relative z-20"
+  >
+    <div class="col-span-12">
+      <!-- start-hidden은 초깃값, fade-up은 보일 때 클래스 -->
+      <div
+        ref="boxA"
+        :class="[
+          'anim-root',
+          isVisible ? 'fade-up' : 'start-hidden',
+          zoomIn ? 'zoom-in' : ''
+        ]"
+      >
         <v-img
-          src="https://my-moncatfactory-bucket.s3.ap-northeast-2.amazonaws.com/main_page/page_image003.png"
-          height = "400"
+          :src="'https://nepic-s3-data-homepage-bucket.s3.ap-northeast-2.amazonaws.com/images/midle-m2-2.png'"
+          class="w-full h-[800px]"
           cover
         ></v-img>
-      </v-col>
-    </v-row>
-  </v-card> 
+      </div>
+    </div>
+  </div>
 </template>
 
+
+
+
 <script setup>
+
+import { ref, onMounted, onBeforeUnmount } from "vue";
+
+const boxA = ref(null);
+const isVisible = ref(false);
+const zoomIn = ref(false);
+let observer = null;
+
+onMounted(() => {
+  const target = boxA.value;
+  if (!target) return;
+
+  const options = {
+    threshold: 0.25,
+    rootMargin: "0px 0px -10% 0px",
+  };
+
+  observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        isVisible.value = true;
+
+        // 등장 후 약간의 딜레이 후 확대
+        setTimeout(() => {
+          zoomIn.value = true;
+        }, 900); // fade-up이 끝나는 시점(0.9s) 이후 실행
+      }
+    });
+  }, options);
+
+  observer.observe(target);
+});
+
+onBeforeUnmount(() => {
+  if (observer) observer.disconnect();
+});
+
+
 </script>
+
+<style scoped>
+.anim-root {
+  transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+  will-change: opacity, transform;
+}
+
+/* 1단계: 아래에서 위로 등장 */
+.start-hidden {
+  opacity: 0;
+  transform: translateY(80px);
+}
+
+.fade-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 2단계: 천천히 확대 */
+.zoom-in {
+  transform: scale(1.05); /* 아주 자연스러운 확대 */
+  transition: transform 3s ease-out;
+}
+</style> 
