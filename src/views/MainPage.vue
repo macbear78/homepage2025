@@ -2,7 +2,7 @@
   <div class="w-full overflow-hidden">
     <!-- Title1 (스크롤 버튼 포함) -->
     <!-- 첫 번째 섹션 -->
-    <section class="h-screen">
+    <section>
       <Title1Component @scroll-next="scrollToNext" />
     </section>
 
