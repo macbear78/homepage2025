@@ -16,7 +16,8 @@ import FooterComponet from './components/FooterComponet.vue'
 import router from './router';
 
 onMounted(() => {
-  router.push({path:'/main'});
+  //router.push({path:'/main'});
+  router.push({path:'/News/NewsCardList'});
 })
 
 </script>

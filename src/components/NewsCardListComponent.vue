@@ -1,31 +1,37 @@
 <template>
-  <section class="flex flex-col gap-6 p-4">
-    <h2 class="text-2xl font-bold text-center">뉴스 카드 리스트</h2>
+  <div class="flex justify-center gap-4">
+    <a class="text-lg text-black font-bold underline decoration-red-500 decoration-2 underline-offset-4">
+    전체
+  </a>
+    <a class="text-lg text-black no-underline">네픽소식</a>
+    <a class="text-lg text-black no-underline">지원사업소식</a>
+  </div>
 
-    <!-- 카드 리스트 -->
-    <div class="flex justify-center">
-      <div
-        class="grid w-full max-w-6xl gap-6
-               [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]
-               place-items-center"
-      >
-        <div
-          v-for="item in newsList"
-          :key="item.news_board_id"
-          class="w-full max-w-sm"
-        >
-          <NewsCardComponent
-            :imageUrl="item.image_urls || '/assets/default.png'"
-            :tag="item.tag || 'news'"
-            :tagColor="item.tagColor || 'green'"
-            :date="item.date || item.wr_date"
-            :title="item.title"
-            :excerpt="item.excerpt || item.content"
-            @click="openArticle(item)"
-          />
-        </div>
-      </div>
+
+  <div class="ml-5">
+  <div
+    class="grid w-full gap-1 
+           [grid-template-columns:repeat(auto-fit,minmax(480px,1fr))]"
+  >
+    <div
+      v-for="item in newsList"
+      :key="item.news_board_id"
+      class="w-full"
+    >
+      <NewsCardComponent
+        :imageUrl="item.image_urls || '/assets/default.png'"
+        :tag="item.tag || 'news'"
+        :tagColor="item.tagColor || 'green'"
+        :date="item.date || item.wr_date"
+        :title="item.title"
+        :excerpt="item.excerpt || item.content"
+        @click="openArticle(item)"
+      />
     </div>
+  </div>
+
+</div>
+
 
     <!-- 페이지네이션 -->
     <div class="flex justify-center items-center gap-2 mt-8">
@@ -62,7 +68,7 @@
         »
       </button>
     </div>
-  </section>
+
 </template>
 
 

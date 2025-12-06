@@ -90,7 +90,7 @@
 
               </div>
               <div class="bg-yellow-200 flex flex-col">
-                    <router-link :to="'/'" class="text-black no-underline">
+                    <router-link :to="'/News/NewsCardList'" class="text-black no-underline">
                         뉴스</router-link>
                     <router-link :to="'/'" class="text-black no-underline">
                         공지사항</router-link>
