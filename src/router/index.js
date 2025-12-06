@@ -12,6 +12,7 @@ import NewsBoardWriteComponent from "@/components/admin_board/NewsBoardWriteComp
 import NewsBoardListComponent from "@/components/admin_board/NewsBoardListComponent.vue";
 import NewsBoardDetailComponent from "@/components/admin_board/NewsBoardDetailComponent.vue";
 import NewsBoardUpdateComponent from "@/components/admin_board/NewsBoardUpdateComponent.vue";
+import Support1Page from "@/views/Support1Page.vue";
 
 const routes = [ 
     {
@@ -49,6 +50,11 @@ const routes = [
                 component: NewsCardDetailComponent
             },
         ]    
+    },
+    {
+        path: "/Support1",   
+        name: "Support1Page",  
+        component: Support1Page,  
     },
     {
         path: "/Admin",   
