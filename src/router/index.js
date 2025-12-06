@@ -18,28 +18,33 @@ const routes = [
     {
         path: "/Main",
         name: "MainPage",
-        component: MainPage,  
+        component: MainPage,
+        meta : { bgStyle : "black" }
     },
     {
         path: "/Organization",  
         name: "OrganizationPage",  
         component: OrganizationPage, 
+        meta : { bgStyle : "white" }
     },
     { 
         path: "/AboutCompany",  
         name: "AboutCompanyPage",  
-        component: AboutCompanyPage, 
+        component: AboutCompanyPage,
+        meta : { bgStyle : "white" } 
     },
     {
         path: "/ContactUs",   
         name: "ContactUsPage",  
-        component: ContactUsPage,  
+        component: ContactUsPage, 
+        meta : { bgStyle : "white" } 
     },
 
     {
         path: "/News",   
         name: "NewsPage",  
         component: NewsPage, 
+        meta : { bgStyle : "white" },
         children: [
             {
                 path: 'NewsCardList',
@@ -55,11 +60,13 @@ const routes = [
         path: "/Support1",   
         name: "Support1Page",  
         component: Support1Page,  
+        meta : { bgStyle : "white" }
     },
     {
         path: "/Admin",   
         name: "AdminPage",  
         component: AdminPage, 
+        meta : { bgStyle : "white" },
         children: [
             {
                 path: 'AdminMain', 

@@ -1,23 +1,26 @@
 <template>
   <v-app>
-  <header-componet/>
-
+  <header-componet :bgStyle="headerBgType" />
   <router-view/>
   <footer-componet/>
   </v-app>   
 </template> 
 
 <script setup>
-import { onMounted } from 'vue'
-import HeaderComponet from './components/HeaderComponet.vue'
- 
+import { computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import HeaderComponet from './components/HeaderComponet.vue' 
 import FooterComponet from './components/FooterComponet.vue'
 
 import router from './router';
+const route = useRoute()
+
+const headerBgType = computed(() => route.meta.bgStyle || 'default')
+
 
 onMounted(() => {
-  //router.push({path:'/main'});
-  router.push({path:'/News/NewsCardList'});
+  router.push({path:'/main'});
+
 })
 
 </script>
