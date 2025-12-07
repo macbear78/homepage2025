@@ -1,14 +1,15 @@
 <template>
 
-  <header :class="[
-    'fixed top-0 left-0 w-full shadow-md z-50 transition-all duration-300',
-    bgStyle === 'black' ? 'bg-black' : 'bg-white'
+  <header 
+   :class="[
+    'z-50 fixed top-0 left-0 w-full shadow-md transition-all duration-300',
+    bgStyle === 'black' ? 'bg-black' : 'bg-white' 
   ]"> 
-
     <!-- 반응형 그리드: 모바일 6, 테블릿 8, PC 12 -->
-    <div class="grid grid-cols-6 sm:grid-cols-8 lg:grid-cols-12 items-center h-20 gap-4">
-
-
+    <div @mouseenter="isHover = true"
+       class=" z-60 grid grid-cols-6 sm:grid-cols-8 lg:grid-cols-12 items-center h-20 gap-4 ">
+      
+     
       <!-- 로고 -->
       <div class="flex col-span-2 justify-center">
         <img src="https://nepic-s3-data-homepage-bucket.s3.ap-northeast-2.amazonaws.com/images/logo.png"
@@ -72,59 +73,92 @@
       </div>
 
     </div>
-
-    <div name="b"
-      class="grid bg-white grid-cols-6 sm:grid-cols-8 lg:grid-cols-12 items-center h-48 gap-4 relative z-10 transition-all duration-300">
-      <div class="flex col-span-2"></div>
-      <div class="hidden sm:flex col-span-6 sm:col-span-6 lg:col-span-8 justify-start space-x-24">
-        <!-- 내부를 5등분하는 그리드 -->
-        <div class="grid grid-cols-5 gap-4 w-full">
-          <div class="bg-red-200 flex flex-col">
-            <router-link :to="'/AboutCompany'" class="text-black no-underline">
-              회사소개</router-link>
-            <router-link :to="'/'" class="text-black no-underline">
-              조직도</router-link>
-            <router-link :to="'/'" class="text-black no-underline">
-              오시는길</router-link>
-          </div>
-          <div class="bg-blue-200 flex flex-col">
-            <router-link :to="'/'" class="text-black no-underline">
-              MES&ERP</router-link>
-            <router-link :to="'/'" class="text-black no-underline">
-              IoT구축</router-link>
-            <router-link :to="'/'" class="text-black no-underline">
-              스마트공방</router-link>
-
-          </div>
-          <div class="bg-green-200 flex flex-col">
-            <router-link :to="'/'" class="text-black no-underline">
-              중기청</router-link>
-            <router-link :to="'/'" class="text-black no-underline">
-              바우처</router-link>
-
-          </div>
-          <div class="bg-yellow-200 flex flex-col">
-            <router-link :to="'/News/NewsCardList'" class="text-black no-underline">
-              뉴스</router-link>
-            <router-link :to="'/'" class="text-black no-underline">
-              공지사항</router-link>
-          </div>
-          <div class="bg-purple-200 flex flex-col">
-            <router-link :to="'/support1'" class="text-black no-underline">
-              온라인문의</router-link>
-            <router-link :to="'/support2'" class="text-black no-underline">
-              견적요청</router-link>
-          </div>
-        </div>
-
-
-
-      </div>
-    </div>
+    
 
 
   </header>
 
+    <transition name="slide-fade">
+      <div name="b"
+          v-show="isHover"
+          @mouseleave="isHover = false" 
+        :class="['absolute w-full z-40 grid grid-cols-6 sm:grid-cols-8 lg:grid-cols-12 items-center h-32 gap-4 transition-all duration-300',
+               bgStyle === 'black' ? 'bg-black' : 'bg-white'   
+        ]">
+        <div class="flex col-span-2"></div>
+        <div class="hidden sm:flex col-span-6 sm:col-span-6 lg:col-span-8 justify-start space-x-24">
+          <!-- 내부를 5등분하는 그리드 -->
+          <div class="grid grid-cols-5 gap-4 w-full mt-3">
+            <div class="flex flex-col space-y-2">
+              <router-link :to="'/AboutCompany'" 
+              :class="['no-underline',
+                  bgStyle === 'black' ? 'text-white' : 'text-black'
+              ]">
+                회사소개</router-link>
+              <router-link :to="'/'"
+              :class="['no-underline',
+                  bgStyle === 'black' ? 'text-white' : 'text-black'
+              ]">
+                조직도</router-link>
+              <router-link :to="'/'"
+              :class="['no-underline',
+                  bgStyle === 'black' ? 'text-white' : 'text-black'
+              ]">
+                오시는길</router-link>
+            </div>
+            <div class="flex flex-col space-y-2">
+              <router-link :to="'/'" 
+              :class="['no-underline',
+                  bgStyle === 'black' ? 'text-white' : 'text-black'
+              ]">
+                MES&ERP</router-link>
+              <router-link :to="'/'" 
+              :class="['no-underline',
+                  bgStyle === 'black' ? 'text-white' : 'text-black'
+              ]">
+                IoT구축</router-link>
+              <router-link :to="'/'" 
+              :class="['no-underline',
+                  bgStyle === 'black' ? 'text-white' : 'text-black'
+              ]">
+                스마트공방</router-link>
+
+            </div>
+            <div class="flex flex-col space-y-2">
+              <router-link :to="'/'" :class="['no-underline',
+                  bgStyle === 'black' ? 'text-white' : 'text-black'
+              ]">
+                중기청</router-link>
+              <router-link :to="'/'" :class="['no-underline',
+                  bgStyle === 'black' ? 'text-white' : 'text-black'
+              ]">
+                바우처</router-link>
+
+            </div>
+            <div class="flex flex-col space-y-2">
+              <router-link :to="'/News/NewsCardList'" :class="['no-underline',
+                  bgStyle === 'black' ? 'text-white' : 'text-black'
+              ]">
+                뉴스</router-link>
+              <router-link :to="'/'" :class="['no-underline',
+                  bgStyle === 'black' ? 'text-white' : 'text-black'
+              ]">
+                공지사항</router-link>
+            </div>
+            <div class="flex flex-col space-y-2">
+              <router-link :to="'/support1'" :class="['no-underline',
+                  bgStyle === 'black' ? 'text-white' : 'text-black'
+              ]">
+                온라인문의</router-link>
+              <router-link :to="'/support2'" :class="['no-underline',
+                  bgStyle === 'black' ? 'text-white' : 'text-black'
+              ]">
+                견적요청</router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
 </template>
 
 <script setup>
