@@ -19,8 +19,7 @@ const headerBgType = computed(() => route.meta.bgStyle || 'default')
 
 
 onMounted(() => {
-  router.push({path:'/main'});
-
+  router.push({path:'/AboutCompany'});
 })
 
 </script>

@@ -1,37 +1,52 @@
 <template>
   <div
-    class="relative grid bg-gray-500 grid-rows-5 grid-cols-6 sm:grid-cols-8 lg:grid-cols-12 items-center h-50 gap-4 z-20"
+    class="relative grid bg-gray-500 grid-cols-6 sm:grid-cols-8 lg:grid-cols-12 h-[500px] gap-4 z-20"
   >
+
+    <!-- 🔹 배경 이미지는 absolute 레이어 -->
     <div 
       class="absolute inset-0 bg-cover bg-center"
       :style="{ backgroundImage: `url(${imagefile})` }"
-    >
-      <p>{{menu[selNum].name}}</p>
-    </div>
+    ></div>
 
-    <div class="absolute top-[250px] left-4 z-10">
-      <div
-        class="grid h-10 grid-cols-12 text-white text-sm"
+    <!-- 🔹 내용은 relative 로 배경 위에 표시 -->
+    <div class="relative flex flex-col z-30 mt-[100px] col-span-12 px-6">
+      <p class="text-white text-5xl">
+        {{ menu[selNum].name }}
+      </p>
+
+      
+    </div>
+   
+    <div 
+      name="bb"
+      class="absolute bottom-0 left-0 bg-[#1C013B] z-30 px-5 py-2 w-auto inline-block flex justify-center items-center space-x-5"
       >
-        <div class="bg-blue-500 col-span-4 flex items-center justify-center space-x-10">
-          <a class="ml-5">홈</a> &gt; {{menu[selNum].name}}
+      
+      <!-- <a class="text-white">홈</a>
+      <p class="text-white">>회사정보</p>
+      <a class="text-white">회사소개</a>
+      <a class="text-white">조직도</a>
+      <a class="text-white">오시는길</a> -->
+      <div>
+      <a 
+         @click="homeRouter()"
+         class="cursor-pointer no-underline ml-3 text-white">홈 > </a> &gt; 
+         <span class="text-white">{{ subTitleName }}</span>
+         </div>
 
           <a
           v-for="(item, index) in menu || []"
           :key="item.path || item.name"
           @click="selNumChange(index, item.path)"
-          class="cursor-pointer pb-1 transition no-underlin"
+          class="cursor-pointer transition no-underline p-2"
           :class="{
-            'text-teal-400 font-bold border-b-2 bg-yellow-500': index === selNum,
-            'text-white hover:bg-blue-600': index !== selNum
+            'text-white bg-[#0522FF]': index === selNum,
+            'text-white hover:bg-[#0522FF]': index !== selNum
           }"
         >
           {{ item.name }}
         </a>
-        </div>
-
-      </div>
- 
     </div>
   </div>
 </template>
@@ -46,6 +61,7 @@ const router = useRouter()
 
 const props = defineProps({
   imagefile: String,
+  subTitleName: String,
   selNum: Number,
   menu: Array
 })
@@ -61,5 +77,9 @@ function selNumChange(index, path) {
   if (path) {
     router.push(path)
   } 
+}
+
+function homeRouter(){
+  router.push('/main')
 }
 </script>

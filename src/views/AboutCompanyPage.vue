@@ -2,7 +2,8 @@
 
     <SubHeaderComponent
     :imagefile="item.titleImg"
-    :selNum="item.selNum"
+    :subTitleName="item.titleName"
+    :selNum="item.selNum" 
     :menu="item.menu"
     />
 
@@ -19,7 +20,8 @@ import { ref } from 'vue'
 import SubHeaderComponent from '@/components/SubHeaderComponent.vue';
 
 const item = {
-  titleImg: 'https://my-moncatfactory-bucket.s3.ap-northeast-2.amazonaws.com/sub_header/header_image004.png',
+  titleImg: 'https://nepic-s3-data-homepage-bucket.s3.ap-northeast-2.amazonaws.com/images/SubHeader1.png',
+  titleName : "회사정보",
   selNum: 0,
   menu: [
     { name: '회사소개', path: '/CloudFems' },
