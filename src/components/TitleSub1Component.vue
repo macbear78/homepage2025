@@ -1,9 +1,10 @@
 <template>
   <div
-    class="grid bg-white grid-cols-6 sm:grid-cols-8 lg:grid-cols-12 items-center h-[800px] gap-4 relative z-20"
+    class="grid bg-white grid-cols-6 sm:grid-cols-8 lg:grid-cols-12 
+           items-center min-h-[500px] sm:min-h-[600px] lg:min-h-[800px] 
+           gap-4 relative z-20"
   >
-    <div class="col-span-12">
-      <!-- start-hidden은 초깃값, fade-up은 보일 때 클래스 -->
+    <div class="col-span-6 sm:col-span-8 lg:col-span-12">
       <div
         ref="boxA"
         :class="[
@@ -13,20 +14,19 @@
         ]"
       >
         <v-img
-          :src="'https://nepic-s3-data-homepage-bucket.s3.ap-northeast-2.amazonaws.com/images/midle-m2-1.png'"
-          class="w-full h-[800px]"
+          src="https://nepic-s3-data-homepage-bucket.s3.ap-northeast-2.amazonaws.com/images/midle-m2-1.png"
+          class="w-full 
+                 h-[350px] 
+                 sm:h-[550px] 
+                 lg:h-[800px]"
           cover
-        ></v-img>
+        />
       </div>
     </div>
   </div>
 </template>
 
-
-
-
 <script setup>
-
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const boxA = ref(null);
@@ -48,10 +48,10 @@ onMounted(() => {
       if (entry.isIntersecting) {
         isVisible.value = true;
 
-        // 등장 후 약간의 딜레이 후 확대
+        // fade-up 후 확대 애니메이션
         setTimeout(() => {
           zoomIn.value = true;
-        }, 900); // fade-up이 끝나는 시점(0.9s) 이후 실행
+        }, 900);
       }
     });
   }, options);
@@ -62,9 +62,8 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (observer) observer.disconnect();
 });
-
-
 </script>
+
 
 <style scoped>
 .anim-root {
@@ -83,9 +82,10 @@ onBeforeUnmount(() => {
   transform: translateY(0);
 }
 
-/* 2단계: 천천히 확대 */
+/* 2단계: 부드러운 확대 */
 .zoom-in {
-  transform: scale(1.05); /* 아주 자연스러운 확대 */
+  transform: scale(1.05);
   transition: transform 3s ease-out;
 }
-</style> 
+</style>
+

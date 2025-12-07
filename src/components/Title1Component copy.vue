@@ -1,12 +1,12 @@
 <template>
-  <div class="relative w-full">
+  <div class="relative bg-blue">
     <v-carousel
       cycle
       hide-delimiter-background
-      height="350"
-      class="no-gap md:h-[550px] lg:h-[700px]"
+      height="700"
       interval="5000"
       continuous
+      class="no-gap"
       v-model="currentSlide"
       @update:modelValue="playAnimation"
     >
@@ -16,27 +16,18 @@
       <v-carousel-item
         v-for="(image, i) in slides"
         :key="i"
-        class="fill-height relative"
+        class="fill-height no-padding relative"
       >
-        <!-- 이미지 -->
-        <v-img :src="image" cover class="w-full h-full"></v-img>
+        <v-img :src="image" class="w-full h-full" cover></v-img>
 
         <!-- 텍스트 박스 -->
-        <div
-          class="absolute left-4 bottom-12 
-                 sm:left-6 sm:bottom-20 
-                 md:left-10 md:bottom-28
-                 lg:left-16 lg:bottom-40 
-                 flex flex-col"
-        >
+        <div class="absolute bottom-40 left-10 flex flex-col items-start">
           <div class="relative">
-
-            <!-- 제목 -->
+            <!-- 제목 --> 
             <transition name="slide-left">
               <h2
                 v-if="titleVisible[i]"
-                class="text-white font-bold whitespace-nowrap
-                       text-xl sm:text-2xl md:text-4xl lg:text-5xl"
+                class="text-white text-5xl font-bold whitespace-nowrap"
               >
                 {{ titles[i] }}
               </h2>
@@ -46,22 +37,18 @@
             <transition name="slide-left">
               <p
                 v-if="subtitleVisible[i]"
-                class="absolute text-white mt-3 whitespace-nowrap
-                       text-sm sm:text-base md:text-xl lg:text-2xl"
+                class="absolute text-start text-white text-2xl mt-4 whitespace-nowrap"
               >
-                {{ subtitles[i] }}<br />
+                {{ subtitles[i] }}<br/>
                 {{ subtitles2[i] }}
               </p>
             </transition>
-
           </div>
         </div>
-
       </v-carousel-item>
     </v-carousel>
   </div>
 </template>
-
 
 <script setup>
 import { ref } from "vue";
@@ -117,6 +104,7 @@ function playAnimation(index) {
 </script>
 
 <style scoped>
+/* 슬라이드 왼쪽 → 오른쪽 효과 */
 .slide-left-enter-from {
   opacity: 0;
   transform: translateX(-40px);
@@ -131,4 +119,3 @@ function playAnimation(index) {
   transform: translateX(0);
 }
 </style>
-

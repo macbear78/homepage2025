@@ -1,12 +1,5 @@
 <template>
-  <p>11</p>
-  <p>11</p>
-  <p>11</p>
-  <p>11</p>
-  <p>11</p>
-  <p>11</p>
-  <p>11</p>
-  <p>11</p>
+
     <SubHeaderComponent
     :imagefile="item.titleImg"
     :selNum="item.selNum"

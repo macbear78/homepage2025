@@ -1,84 +1,74 @@
 <template>
-  <!-- 카테고리 탭 -->
-  <div class="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 my-4">
-
-    <a class="text-lg text-black font-bold underline decoration-red-500 decoration-2 underline-offset-4 cursor-pointer">
-      전체
-    </a>
-
-    <a class="text-lg text-black no-underline cursor-pointer">
-      네픽소식
-    </a>
-
-    <a class="text-lg text-black no-underline cursor-pointer">
-      지원사업소식
-    </a>
-
+  <div class="flex justify-center gap-4">
+    <a class="text-lg text-black font-bold underline decoration-red-500 decoration-2 underline-offset-4">
+    전체
+  </a>
+    <a class="text-lg text-black no-underline">네픽소식</a>
+    <a class="text-lg text-black no-underline">지원사업소식</a>
   </div>
 
-  <!-- 카드 그리드 -->
-  <div class="px-4">
-    <div class="
-      grid gap-4
-      grid-cols-1
-      sm:grid-cols-2
-      lg:grid-cols-3
-    ">
-      <div
-        v-for="item in newsList"
-        :key="item.news_board_id"
-        class="w-full"
-      >
-        <NewsCardComponent
-          :imageUrl="item.image_urls || '/assets/default.png'"
-          :tag="item.tag || 'news'"
-          :tagColor="item.tagColor || 'green'"
-          :date="item.date || item.wr_date"
-          :title="item.title"
-          :excerpt="item.excerpt || item.content"
-          @click="openArticle(item)"
-        />
-      </div>
+
+  <div class="ml-5">
+  <div
+    class="grid w-full gap-1 
+           [grid-template-columns:repeat(auto-fit,minmax(480px,1fr))]"
+  >
+    <div
+      v-for="item in newsList"
+      :key="item.news_board_id"
+      class="w-full"
+    >
+      <NewsCardComponent
+        :imageUrl="item.image_urls || '/assets/default.png'"
+        :tag="item.tag || 'news'"
+        :tagColor="item.tagColor || 'green'"
+        :date="item.date || item.wr_date"
+        :title="item.title"
+        :excerpt="item.excerpt || item.content"
+        @click="openArticle(item)"
+      />
     </div>
   </div>
 
-  <!-- 페이지네이션 -->
-  <div class="flex justify-center flex-wrap items-center gap-2 mt-8 px-4">
+</div>
 
-    <!-- 이전 블록 -->
-    <button
-      class="px-3 py-1.5 rounded-md border border-gray-300 bg-white text-sm hover:bg-gray-100 transition disabled:opacity-50"
-      :disabled="currentPageBlock === 1"
-      @click="goToPrevBlock"
-    >
-      «
-    </button>
 
-    <!-- 페이지 번호 -->
-    <button
-      v-for="page in pageNumbers"
-      :key="page"
-      :class="[
-        'px-3 py-1.5 rounded-md border text-sm transition',
-        currentPage === page
-          ? 'bg-blue-500 text-white border-blue-500'
-          : 'border-gray-300 bg-white hover:bg-gray-100'
-      ]"
-      @click="goToPage(page)"
-    >
-      {{ page }}
-    </button>
+    <!-- 페이지네이션 -->
+    <div class="flex justify-center items-center gap-2 mt-8">
+      <!-- 이전 블록 -->
+      <button
+        class="px-3 py-1.5 rounded-md border border-gray-300 bg-white text-sm hover:bg-gray-100 transition disabled:opacity-50"
+        :disabled="currentPageBlock === 1"
+        @click="goToPrevBlock"
+      >
+        «
+      </button>
 
-    <!-- 다음 블록 -->
-    <button
-      class="px-3 py-1.5 rounded-md border border-gray-300 bg-white text-sm hover:bg-gray-100 transition disabled:opacity-50"
-      :disabled="currentPageBlock === totalBlocks"
-      @click="goToNextBlock"
-    >
-      »
-    </button>
+      <!-- 페이지 번호 -->
+      <button
+        v-for="page in pageNumbers"
+        :key="page"
+        :class="[
+          'px-3 py-1.5 rounded-md border text-sm transition',
+          currentPage === page
+            ? 'bg-blue-500 text-white border-blue-500'
+            : 'border-gray-300 bg-white hover:bg-gray-100'
+        ]"
+        @click="goToPage(page)"
+      >
+        {{ page }}
+      </button>
 
-  </div>
+      <!-- 다음 블록 -->
+      <button
+        class="px-3 py-1.5 rounded-md border border-gray-300 bg-white text-sm hover:bg-gray-100 transition disabled:opacity-50"
+        :disabled="currentPageBlock === totalBlocks"
+        @click="goToNextBlock"
+      >
+        »
+      </button>
+    </div>
+
 </template>
 
 
